@@ -3,3 +3,6 @@
 /uncaughtExceptions.log
 /coverage
 /config/*
+/dist
+.env
+
