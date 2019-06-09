@@ -4,7 +4,11 @@
   "description": "Taxi Review App",
   "main": "app.js",
   "scripts": {
-    "test": "jest --watchAll --verbose --coverage"
+    "test": "jest --watchAll --verbose --coverage",
+    "start": "node dist/app.js",
+    "clean": "rm -rf dist",
+    "build": "npm run clean && babel server --s -d dist",
+    "production": "npm run build && node bin/production"
   },
   "repository": {
     "type": "git",
@@ -18,14 +22,17 @@
   "homepage": "https://github.com/chingu-voyages/v9-bears-team-31#readme",
   "dependencies": {
     "@babel/core": "^7.4.5",
+    "@babel/polyfill": "^7.4.4",
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-es2015": "^6.24.1",
     "babel-register": "^6.26.0",
     "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
     "cloudinary": "^1.14.0",
     "config": "^3.1.0",
     "cors": "^2.8.5",
+    "dotenv": "^8.0.0",
     "eslint": "^5.16.0",
     "express": "^4.17.1",
     "express-async-errors": "^3.1.1",
