@@ -1,0 +1,19 @@
+{
+  "name": "safari-buddy",
+  "version": "1.0.0",
+  "description": "Taxi Review App",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chingu-voyages/v9-bears-team-31.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/chingu-voyages/v9-bears-team-31/issues"
+  },
+  "homepage": "https://github.com/chingu-voyages/v9-bears-team-31#readme"
+}
