@@ -10,7 +10,6 @@ import appRoute from './router/index';
 
 dotenv.config();
 
-console.log(typeof process.env.DBURL, process.env.DBURL);
 
 mongoose.Promise = global.Promise;
 
