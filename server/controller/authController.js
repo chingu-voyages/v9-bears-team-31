@@ -1,3 +1,4 @@
+/* eslint-disable eol-last */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable import/prefer-default-export */
 import bcrypt from 'bcrypt-nodejs';
@@ -5,6 +6,8 @@ import User from '../model/user';
 import {
   generateToken,
 } from '../services/jwtService';
+import responses from '../helper/responses';
+
 
 export const login = async (req, res) => {
   const {
@@ -15,10 +18,7 @@ export const login = async (req, res) => {
     phoneNumber,
   });
   if (!user) {
-    return res.json({
-      data: null,
-      message: 'Incorrect phone number or password',
-    });
+    return res.status(400).send(responses.error(400, 'Incorrect phone number or password'));
   }
   if (bcrypt.compareSync(password, user.password) && user) {
     const userObj = {
@@ -27,10 +27,11 @@ export const login = async (req, res) => {
       firstName: user.firstName,
     };
     const token = await generateToken(userObj);
-    return res.status(200).send({
-      data: user,
+    const data = {
+      user,
       token,
-      message: 'User login Successfully',
-    });
+    };
+    return res.status(200).send(responses.success(200, 'User login Successfully', data));
   }
+  return res.status(400).send(responses.error(400, 'Incorrect phone number or password'));
 };
