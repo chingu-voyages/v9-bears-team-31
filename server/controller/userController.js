@@ -1,6 +1,9 @@
+import bcrypt from 'bcrypt-nodejs';
 import User from '../model/user';
 
-export const addUser = async (req, res) => {
+
+export const signUp = async (req, res) => {
+  req.body.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(8), null);
   const user = await User.create(req.body);
   if (!user) {
     return res.json({
@@ -18,7 +21,7 @@ export const getUsers = async (req, res) => {
   const users = await User.find({});
   if (!users || users.length === 0) {
     return res.json({
-      data: null,
+      data: [],
       message: 'users not found',
     });
   }
