@@ -1,22 +1,29 @@
 import User from '../model/user';
 
-// add new user to the database
-export function addUser(req, res) {
-  const user = new User(req.body);
-  user.save((error, data) => {
-    if (error) {
-      res.json(error);
-    }
-    res.json(data);
+export const addUser = async (req, res) => {
+  const user = await User.create(req.body);
+  if (!user) {
+    return res.json({
+      data: null,
+      message: 'User not created',
+    });
+  }
+  return res.json({
+    data: user,
+    message: 'User created successfully',
   });
-}
+};
 
-// get all user from the database
-export function getUsers(req, res) {
-  User.find({}, (error, users) => {
-    if (error) {
-      res.json(error);
-    }
-    res.json(users);
+export const getUsers = async (req, res) => {
+  const users = await User.find({});
+  if (!users || users.length === 0) {
+    return res.json({
+      data: null,
+      message: 'users not found',
+    });
+  }
+  return res.json({
+    data: users,
+    message: 'Users fetched successfully',
   });
-}
+};
