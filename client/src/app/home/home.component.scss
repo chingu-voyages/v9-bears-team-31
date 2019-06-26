@@ -1,10 +1,19 @@
 @import url('https://fonts.googleapis.com/css?family=Anton&display=swap');
+article {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
 .container {
+  flex-grow: 1;
   background: url('../../assets/img/banner-img2.png') no-repeat;
   height: 100vh;
   background-size:contain;
   background-position:right;
   background-size: 80%;
+
 }
 
 .header {
@@ -20,6 +29,13 @@
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   font-size: 1.2rem;
   color: rgb(32, 32, 29);
+}
+
+footer {
+  flex-shrink: 0;
+  background: #ecab27;
+  margin: 0;
+  padding: 0;
 }
 
 /*
@@ -51,7 +67,26 @@
 
 @media (min-width: 768px) and (max-width: 1024px) {
 
-  //CSS
+  .container {
+    background-position:right;
+    margin-top: -20rem;
+    background-size: 80%;
+  }
+
+  .header {
+    font-size: 1.8rem;
+    margin-top: 20rem;
+    margin-left: 0;
+    padding: 1rem;
+    text-align: left;
+    background: #f7f6f4;
+    opacity: .8;
+    border-radius: 5px;
+    border: #f5c667 solid .5px;
+  }
+  .sub-heading {
+    font-size: .9rem;
+  }
 
 }
 
@@ -82,6 +117,21 @@
     background-size: 80%;
   }
 
+  .header {
+    font-size: 1.8rem;
+    margin-top: 14rem;
+    margin-left: 0;
+    padding: 1rem;
+    text-align: left;
+    background: #f7f6f4;
+    opacity: .8;
+    border-radius: 5px;
+    border: #f5c667 solid .5px;
+  }
+  .sub-heading {
+    font-size: .9rem;
+  }
+
 }
 
 /*
@@ -94,6 +144,21 @@
     background-position:right;
     margin-top: -14rem;
     background-size: 80%;
+  }
+
+  .header {
+    font-size: 1.4rem;
+    margin-top: 14rem;
+    margin-left: 0;
+    padding: 1rem;
+    text-align: left;
+    background: #f7f6f4;
+    opacity: .9;
+    border-radius: 5px;
+    border: #f5c667 solid .5px;
+  }
+  .sub-heading {
+    font-size: 0.8rem;
   }
 }
 

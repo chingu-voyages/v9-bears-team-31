@@ -22,8 +22,12 @@ export class AppComponent implements OnInit {
       path: '/'
     },
     {
-      title: 'My Account',
-      path: '/auth'
+      title: 'Login',
+      path: '/login'
+    },
+    {
+      title: 'Register',
+      path: '/register'
     }
   ];
 // tslint:disable-next-line: variable-name
