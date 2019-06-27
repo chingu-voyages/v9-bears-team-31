@@ -4,7 +4,7 @@
   "description": "Taxi Review App",
   "main": "app.js",
   "scripts": {
-    "test": "jest --watchAll --verbose --coverage",
+    "test": "mocha --require @babel/register test/*.spec.js --exit",
     "start": "node dist/app.js",
     "clean": "rm -rf dist",
     "build": "npm run clean && babel server --s -d dist && npm run start",
@@ -14,7 +14,7 @@
     "type": "git",
     "url": "git+https://github.com/chingu-voyages/v9-bears-team-31.git"
   },
-  "author": "",
+  "author": "chingu-team-31",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/chingu-voyages/v9-bears-team-31/issues"
@@ -47,9 +47,18 @@
     "winston-mongodb": "^5.0.0"
   },
   "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.3.4",
+    "@babel/node": "^7.2.2",
+    "@babel/preset-env": "^7.3.4",
+    "@babel/register": "^7.0.0",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.11.0",
+    "expect.js": "^0.3.1",
+    "factory-girl": "^5.0.4",
+    "faker": "^4.1.0",
     "jest": "^24.8.0",
+    "mocha": "^6.1.4",
     "nodemon": "^1.19.1",
     "supertest": "^4.0.2"
   }

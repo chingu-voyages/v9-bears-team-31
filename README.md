@@ -17,4 +17,4 @@ Safari Buddy is an app for passengers to use their human intelligence to review 
 - Users must be authenticated
     - User Signup using their phone number and other details
     - User login using their phone number and password
-    - User logou
+    - User logout
