@@ -13,7 +13,7 @@ export const signUp = async (req, res) => {
     }
     return res.status(201).send(responses.success(201, 'User created Successfully', user));
   } catch (error) {
-    return res.status(400).send(responses.error(400, 'User not created'));
+    return res.status(500).send(responses.error(500, 'Internal server error, while creating a user'));
   }
 };
 

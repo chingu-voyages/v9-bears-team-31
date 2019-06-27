@@ -1,24 +1,24 @@
 import mongoose from 'mongoose';
 
 const {
-  Schema
+  Schema,
 } = mongoose;
-const userSchema = new Schema({
-  phoneNumber: {
+const taxiSchema = new Schema({
+  tags: [{
+    type: String,
+  }],
+  taxiImage: {
+    type: String,
+  },
+  plateNumber: {
     type: String,
     required: true,
   },
-  firstName: {
-    type: String,
-  },
-  lastName: {
-    type: String,
-  },
-  password: {
+  model: {
     type: String,
     required: true,
   },
-  role: {
+  owner: {
     type: Schema.Types.ObjectId,
     required: true,
   },
@@ -26,4 +26,4 @@ const userSchema = new Schema({
   timestamps: true,
 });
 
-export default mongoose.model('User', userSchema);
+export default mongoose.model('Taxi', taxiSchema);
