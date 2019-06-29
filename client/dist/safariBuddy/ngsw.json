@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1561224512849,
+  "timestamp": 1561638564341,
   "index": "/index.html",
   "assetGroups": [
     {
@@ -10,13 +10,13 @@
       "urls": [
         "/favicon.ico",
         "/index.html",
-        "/main-es2015.46a9c6c173cf156e6528.js",
-        "/main-es5.9fc520388390a19af1df.js",
+        "/main-es2015.c8204ad9c337228c3654.js",
+        "/main-es5.6c7a06f299be7a4761ba.js",
         "/polyfills-es2015.5728f680576ca47e99fe.js",
         "/polyfills-es5.405730e5ac8f727bd7d7.js",
         "/runtime-es2015.858f8dd898b75fe86926.js",
         "/runtime-es5.741402d1d47331ce975c.js",
-        "/styles.603628fe90a3f00fae72.css"
+        "/styles.74bff7b6490a8eacc333.css"
       ],
       "patterns": []
     },
@@ -32,7 +32,13 @@
         "/assets/icons/icon-384x384.png",
         "/assets/icons/icon-512x512.png",
         "/assets/icons/icon-72x72.png",
-        "/assets/icons/icon-96x96.png"
+        "/assets/icons/icon-96x96.png",
+        "/assets/img/banner-img2.png",
+        "/assets/img/taxi.png",
+        "/assets/img/taxi2",
+        "/banner-img2.3b146913d59759fc185b.png",
+        "/flags.416250f60d785a2e02f1.png",
+        "/flags@2x.d429a5777afaf2fc3496.png"
       ],
       "patterns": []
     }
@@ -47,15 +53,21 @@
     "/assets/icons/icon-512x512.png": "559d9c4318b45a1f2b10596bbb4c960fe521dbcc",
     "/assets/icons/icon-72x72.png": "c457e56089a36952cd67156f9996bc4ce54a5ed9",
     "/assets/icons/icon-96x96.png": "3914125a4b445bf111c5627875fc190f560daa41",
+    "/assets/img/banner-img2.png": "df9716a04a3bf4ccdcb2dc763ea68807d68d4bee",
+    "/assets/img/taxi.png": "37dc52db21e13a5fe2c3e893102cd8862707a748",
+    "/assets/img/taxi2": "df9716a04a3bf4ccdcb2dc763ea68807d68d4bee",
+    "/banner-img2.3b146913d59759fc185b.png": "df9716a04a3bf4ccdcb2dc763ea68807d68d4bee",
     "/favicon.ico": "84161b857f5c547e3699ddfbffc6d8d737542e01",
-    "/index.html": "4a8972faf33e5a68beb4176f91d265141788a1d3",
-    "/main-es2015.46a9c6c173cf156e6528.js": "2e89ced3826d51a149ccee61f7d01f44840625db",
-    "/main-es5.9fc520388390a19af1df.js": "6b9e1df86c93cbaa851c9e89981f480254df55f6",
+    "/flags.416250f60d785a2e02f1.png": "21572c9751e5a3dc20395befa0fcb349c32c4811",
+    "/flags@2x.d429a5777afaf2fc3496.png": "d6f843711c3cfe6d9a037e4c61d293f563e55802",
+    "/index.html": "405e9735aa17919275c5dc13720f938bd4b2c47a",
+    "/main-es2015.c8204ad9c337228c3654.js": "b83a7d1574ea4e820626dc9ab17c9bbbace3fe54",
+    "/main-es5.6c7a06f299be7a4761ba.js": "e0d1d7dc75a6502d5359b3011393e74252b7e326",
     "/polyfills-es2015.5728f680576ca47e99fe.js": "77f974dd2b186031cfc4f4526d96db4efcd39353",
     "/polyfills-es5.405730e5ac8f727bd7d7.js": "042d7744ef82a64c73310f1db253736731a03950",
     "/runtime-es2015.858f8dd898b75fe86926.js": "b62956c2192bfe5516d6374e753773901ed50ec5",
     "/runtime-es5.741402d1d47331ce975c.js": "b62956c2192bfe5516d6374e753773901ed50ec5",
-    "/styles.603628fe90a3f00fae72.css": "e1f2ad73f9414d45fceed001920f55ede35149b3"
+    "/styles.74bff7b6490a8eacc333.css": "9a8e9ca30df755e50181128f949aa2966808df76"
   },
   "navigationUrls": [
     {
