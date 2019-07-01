@@ -1,0 +1,36 @@
+.mat-toolbar {
+  font-weight: bolder;
+  font-size: 2rem;
+  background: #ECAB27;
+  color: #ffffff;
+}
+
+.mat-drawer {
+  background: #F4CA3A;
+}
+
+.mat-drawer a {
+  background: #ECAB27;
+  color: #ffffff;
+  font-weight: bold;
+  width: 8rem;
+}
+
+.mat-drawer-content {
+  background: -webkit-linear-gradient(left, #92884c, #eceecf);
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+  .mat-drawer a {
+    width: 6rem;
+    text-align: center;
+  }
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+  .mat-drawer a {
+    width: 6rem;
+    text-align: center;
+  }
+}
+
