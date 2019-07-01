@@ -19,12 +19,13 @@
                 <input
                   type="button"
                   (click)="sendLoginCode()"
-                  class="btn btn-fill btn-info btn-wd"
+                  class="btn btn-fill btn-info btn-wd mb-4"
                   name="sendText"
                   value="SMS Text Login Code"
                 />
               </div>
             </div>
+            <a [routerLink]="['/login']" routerLinkActive="router-link-active" class="register-link">Have an Account? Login</a>
           </div>
 
           <div *ngIf="windowRef.confirmationResult">
