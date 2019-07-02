@@ -1,0 +1,36 @@
+form {
+  display: block;
+  background: -webkit-linear-gradient(left, #ECAB28, #F4CA3A);
+  margin-top: 3%;
+  padding: 3%;
+  border-radius: 5px;
+}
+
+.container h3 {
+  text-align: center;
+}
+
+.form-group button {
+  width: 80px;
+}
+
+@media (max-width: 767px) {
+  .container h3 {
+    font-size: 1rem;
+    color: rgb(39, 33, 21);
+  }
+}
+
+@media (max-width: 480px) {
+  .form-group button {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    width: 160px;
+    text-align: center;
+  }
+
+  form a {
+    text-align: center;
+  }
+}
