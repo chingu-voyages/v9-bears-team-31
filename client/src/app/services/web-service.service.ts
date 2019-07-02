@@ -35,7 +35,7 @@ export class WebServiceService {
       password: context.password
     };
 
-    return this.http.post<any>('', user)
+    return this.http.post<any>('http://127.0.0.1:3300/api/v1/login', user)
       .pipe(
         tap((userResponse: any) => {
           this.setCredentials(userResponse, context.remember);
@@ -46,7 +46,7 @@ export class WebServiceService {
 
   // register service
   register(user: any): Observable<any> {
-    return this.http.post<any>('', user)
+    return this.http.post<any>('http://127.0.0.1:3300/api/v1/users', user)
       .pipe(
         tap((userResponse: any) => {
           return of(userResponse);
