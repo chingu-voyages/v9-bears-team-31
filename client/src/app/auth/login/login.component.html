@@ -1,7 +1,7 @@
 <div class="container">
   <div class="">
     <form class="login-container" (ngSubmit)="login()" [formGroup]="loginForm" novalidate>
-      <div class="alert alert-danger" [hidden]="!error || isLoading">
+      <div class="alert alert-danger" [hidden]="!error || loading">
         Username or password incorrect.
       </div>
       <div class="form-group">
@@ -45,8 +45,8 @@
         </label>
       </div>
       <div class="form-group">
-        <button class="btn btn-fill btn-info btn-wd" type="submit" [disabled]="loginForm.invalid || isLoading">
-          <i class="fas fa-cog fa-spin" [hidden]="!isLoading"></i>
+        <button class="btn btn-fill btn-info btn-wd" type="submit" [disabled]="loginForm.invalid || loading">
+          <i class="fas fa-cog fa-spin" [hidden]="!loading"></i>
           <span>Login</span>
         </button>
       </div>
