@@ -1,9 +1,14 @@
 export interface User  {
-  firstName: string;
-  lastName: string;
-  phoneNumber: string;
-  password: string;
-  role: boolean;
+  data: {
+    userData: {
+      firstName: string;
+      lastName: string;
+      phoneNumber: string;
+      password: string;
+      isAdmin: boolean;
+    },
+    token: string;
+  };
 }
 
 export interface LoginContext {

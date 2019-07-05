@@ -9,7 +9,7 @@ import { WebServiceService } from './web-service.service';
      canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         if (this.authService.isAuthenticated()) {
           // check if route is restricted by role isAdmin
-          if (route.data.roles && route.data.roles.indexOf(this.authService.credentials.role) === -1) {
+          if (route.data.roles && route.data.roles.indexOf(this.authService.credentials.data.userData.isAdmin) === -1) {
             // role not authorized so redirect to home page
             this.router.navigate(['/login']);
             return false;

@@ -30,6 +30,7 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.loading = true;
+    console.log(this.loginForm.value);
     this.webServivce.login(this.loginForm.value)
       .pipe(
         finalize(() => {
@@ -39,6 +40,7 @@ export class LoginComponent implements OnInit {
       )
       .subscribe((credentials: any) => {
         if (credentials.success) {
+          console.log('login successful');
           this.route.queryParams.subscribe(params => {
             this.router.navigate([params.redirect || '/login'], {replaceUrl: true});
           });
@@ -48,7 +50,7 @@ export class LoginComponent implements OnInit {
 
   private createLoginForm() {
     this.loginForm = this.formBuilder.group({
-      phone: ['', Validators.required],
+      phoneNumber: ['', Validators.required],
       password: ['', Validators.required],
       remember: true
     });
