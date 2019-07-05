@@ -2,22 +2,22 @@
   <div class="">
     <form class="login-container" (ngSubmit)="login()" [formGroup]="loginForm" novalidate>
       <div class="alert alert-danger" [hidden]="!error || loading">
-        Username or password incorrect.
+        phone number or password incorrect.
       </div>
       <div class="form-group">
         <input
           type="tel"
           class="form-control"
-          formControlName="phone"
-          autocomplete="phone"
-          [placeholder]="'Username'"
+          formControlName="phoneNumber"
+          autocomplete="phoneNumber"
+          [placeholder]="'Registered Phone Number'"
         />
         <span hidden>Username</span>
         <small
-          [hidden]="loginForm.controls.phone.valid || loginForm.controls.phone.untouched"
+          [hidden]="loginForm.controls.phoneNumber.valid || loginForm.controls.phoneNumber.untouched"
           class="text-danger"
         >
-          Username is required
+          Phone number is required
         </small>
       </div>
       <div class="form-group">

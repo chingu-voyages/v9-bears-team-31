@@ -19,12 +19,12 @@ export class WebServiceService {
     Client: this.client
   };
 
-  private crendentials: User | null;
+  private _credentials: User | null;
 
   constructor(private http: HttpClient) {
     const savedCredentials = sessionStorage.getItem(credentialsKey) || localStorage.getItem(credentialsKey);
     if (savedCredentials) {
-      this.crendentials = JSON.parse(savedCredentials);
+      this._credentials = JSON.parse(savedCredentials);
     }
    }
 
@@ -54,9 +54,14 @@ export class WebServiceService {
       );
   }
 
-  // logout user
-  logout(): void {
-    localStorage.removeItem('currentUser');
+  /**
+   * Logs out the user and clear credentials.
+   * @return True if the user was logged out successfully.
+   */
+  logout(): Observable<boolean> {
+    // Customize credentials invalidation here
+    this.setCredentials();
+    return of(true);
   }
 
   /**
@@ -72,7 +77,7 @@ export class WebServiceService {
    * @return The user credentials or null if the user is not authenticated.
    */
   get credentials(): User | null {
-    return this.credentials;
+    return this._credentials;
   }
 
   /**
@@ -83,7 +88,7 @@ export class WebServiceService {
    * @param remember True to remember credentials across sessions.
    */
   private setCredentials(user?: User, remember?: boolean) {
-    this.crendentials = user || null;
+    this._credentials = user || null;
     if (user) {
       const storage = remember ? localStorage : sessionStorage;
       storage.setItem(credentialsKey, JSON.stringify(user));
