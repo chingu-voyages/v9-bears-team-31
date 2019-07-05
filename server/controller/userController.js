@@ -1,5 +1,6 @@
 /* eslint-disable eol-last */
 import bcrypt from 'bcrypt-nodejs';
+import _ from 'lodash';
 import User from '../model/user';
 import responses from '../helper/responses';
 import validateUser from '../helper/validateUser';
@@ -29,7 +30,8 @@ export const signUp = async (req, res) => {
 
     await user.save();
 
-    return res.status(201).send(responses.success(201, 'User created Successfully', user));
+    return res.status(201).send(responses.success(201, 'User created Successfully', _.pick(user,
+      ['firstName', 'lastName', 'phoneNumber', 'isAdmin', 'createdAt', 'updatedAt'])));
   } catch (error) {
     return res.status(500).send(responses.error(500, 'Internal server error, while creating a user'));
   }
