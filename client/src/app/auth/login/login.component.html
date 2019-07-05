@@ -1,3 +1,56 @@
 <div class="container">
-  login works
+  <div class="">
+    <form class="login-container" (ngSubmit)="login()" [formGroup]="loginForm" novalidate>
+      <div class="alert alert-danger" [hidden]="!error || loading">
+        Username or password incorrect.
+      </div>
+      <div class="form-group">
+        <input
+          type="tel"
+          class="form-control"
+          formControlName="phone"
+          autocomplete="phone"
+          [placeholder]="'Username'"
+        />
+        <span hidden>Username</span>
+        <small
+          [hidden]="loginForm.controls.phone.valid || loginForm.controls.phone.untouched"
+          class="text-danger"
+        >
+          Username is required
+        </small>
+      </div>
+      <div class="form-group">
+        <input
+          type="password"
+          class="form-control"
+          formControlName="password"
+          autocomplete="current-password"
+          [placeholder]="'Password'"
+          required
+        />
+        <span hidden>Password</span>
+        <small
+          [hidden]="loginForm.controls.password.valid || loginForm.controls.password.untouched"
+          class="text-danger"
+        >
+          Password is required
+        </small>
+      </div>
+
+      <div class="form-check form-group">
+        <label class="form-check-label">
+          <input type="checkbox" class="form-check-input" formControlName="remember" />
+          <span>Remember me</span>
+        </label>
+      </div>
+      <div class="form-group">
+        <button class="btn btn-fill btn-info btn-wd" type="submit" [disabled]="loginForm.invalid || loading">
+          <i class="fas fa-cog fa-spin" [hidden]="!loading"></i>
+          <span>Login</span>
+        </button>
+      </div>
+      <a [routerLink]="['/register']" routerLinkActive="router-link-active" class="register-link">New User? Register</a>
+    </form>
+  </div>
 </div>
