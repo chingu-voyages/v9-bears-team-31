@@ -19,8 +19,8 @@ const userSchema = new Schema({
     required: true,
   },
   role: {
-    type: Schema.Types.ObjectId,
-    required: true,
+    type: Boolean,
+    default: false
   },
 }, {
   timestamps: true,
