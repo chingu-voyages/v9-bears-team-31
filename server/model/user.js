@@ -18,9 +18,9 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
-  role: {
-    type: Schema.Types.ObjectId,
-    required: true,
+  isAdmin: {
+    type: Boolean,
+    default: false
   },
 }, {
   timestamps: true,

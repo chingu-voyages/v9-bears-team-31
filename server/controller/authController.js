@@ -2,6 +2,7 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable import/prefer-default-export */
 import bcrypt from 'bcrypt-nodejs';
+import _ from 'lodash';
 import User from '../model/user';
 import {
   generateToken,
@@ -28,8 +29,9 @@ export const login = async (req, res) => {
         firstName: user.firstName,
       };
       const token = await generateToken(userObj);
+      const userData = _.pick(user, ['firstName', 'lastName', 'phoneNumber', 'isAdmin', 'createdAt', 'updatedAt']);
       const data = {
-        user,
+        userData,
         token,
       };
       return res.status(200).send(responses.success(200, 'User login Successfully', data));
