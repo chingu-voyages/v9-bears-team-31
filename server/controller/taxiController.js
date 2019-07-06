@@ -35,12 +35,25 @@ export const createTaxi = async (req, res) => {
 export const findATaxi = async (req, res) => {
   try {
     const { plateNumber } = req.params;
-    const taxi = await Taxi.findOne({plateNumber});
+    let taxi = await Taxi.findOne({plateNumber});
     if (!taxi) {
       return res.status(404).send(responses.error(404, 'Taxi not found'));
     }
-    const review = await Review.find({taxiPlateNumber: plateNumber});
-    // console.log('my review', review);
+    let review = await Review.find({taxiPlateNumber: plateNumber});
+     
+    let total = 0;
+    review.map(data => {
+      total = total + data.userReview;
+    })
+    const average = (total)/(review.length);
+
+    taxi = await Taxi.findOneAndUpdate({plateNumber}, {
+      averageReview: average
+      }
+    );
+
+    await taxi.save();
+    
     return res.status(200).send({
       'success': true,
       'statusCode': 200,
