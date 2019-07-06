@@ -4,9 +4,6 @@ const {
   Schema,
 } = mongoose;
 const taxiSchema = new Schema({
-  tags: [{
-    type: String,
-  }],
   taxiImage: {
     type: String,
   },
@@ -18,10 +15,10 @@ const taxiSchema = new Schema({
     type: String,
     required: true,
   },
-  owner: {
-    type: Schema.Types.ObjectId,
-    required: true,
-  },
+  averageReview: {
+    type: Number,
+    default: 0
+  }
 }, {
   timestamps: true,
 });
