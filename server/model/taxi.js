@@ -4,10 +4,10 @@ const {
   Schema,
 } = mongoose;
 const taxiSchema = new Schema({
-  tags: [{
+  imageURL: {
     type: String,
-  }],
-  taxiImage: {
+  },
+  imageID: {
     type: String,
   },
   plateNumber: {
@@ -18,10 +18,10 @@ const taxiSchema = new Schema({
     type: String,
     required: true,
   },
-  owner: {
-    type: Schema.Types.ObjectId,
-    required: true,
-  },
+  averageReview: {
+    type: Number,
+    default: 0,
+  }
 }, {
   timestamps: true,
 });
