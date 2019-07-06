@@ -1,6 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable eol-last */
 import Taxi from '../model/taxi';
+import Review from '../model/review';
 import responses from '../helper/responses';
 import validateTaxi from '../helper/validateTaxi';
 
@@ -33,12 +34,32 @@ export const createTaxi = async (req, res) => {
 
 export const findATaxi = async (req, res) => {
   try {
-    const { id } = req.params;
-    const taxi = await Taxi.findById(id);
+    const { plateNumber } = req.params;
+    let taxi = await Taxi.findOne({plateNumber});
     if (!taxi) {
-      return res.status(400).send(responses.error(400, 'Taxi not found'));
+      return res.status(404).send(responses.error(404, 'Taxi not found'));
     }
-    return res.status(200).send(responses.success(200, 'Taxi retrieved Successfully', taxi));
+    let review = await Review.find({taxiPlateNumber: plateNumber});
+     
+    let total = 0;
+    review.map(data => {
+      total = total + data.userReview;
+    })
+    const average = (total)/(review.length);
+
+    taxi = await Taxi.findOneAndUpdate({plateNumber}, {
+      averageReview: average
+      }
+    );
+
+    await taxi.save();
+    
+    return res.status(200).send({
+      'success': true,
+      'statusCode': 200,
+      taxi,
+      review
+    });
   } catch (error) {
     return res.status(500).send(responses.error(500, 'Internal server error, taxi could not be found'));
   }

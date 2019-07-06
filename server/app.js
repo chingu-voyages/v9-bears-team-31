@@ -12,6 +12,7 @@ dotenv.config();
 
 
 mongoose.Promise = global.Promise;
+mongoose.set('useFindAndModify', false);
 
 mongoose.connect(process.env.DBURL, {
   auto_reconnect: true,
