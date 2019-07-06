@@ -2,13 +2,29 @@
 /* eslint-disable eol-last */
 import Taxi from '../model/taxi';
 import responses from '../helper/responses';
+import validateTaxi from '../helper/validateTaxi';
 
 export const createTaxi = async (req, res) => {
+  let field = req.body;
+  const { error } = validateTaxi.validateTaxi(field);
   try {
-    const taxi = await Taxi.create(req.body);
-    if (!taxi) {
-      return res.status(400).send(responses.error(400, 'Taxi not created'));
+    if (error) {
+      return res.status(400).send({
+        error: error.details.map(data => data.message).toString()
+      });
     }
+    let taxi = await Taxi.findOne({plateNumber: field.plateNumber});
+    if (taxi) return res.status(409).send(responses.error(409, `Taxi with plate number ${field.plateNumber} already exists`));
+
+    taxi = new Taxi({
+      imageURL: field.imageURL,
+      imageID: field.imageID,
+      plateNumber: field.plateNumber,
+      model: field.model,
+    });
+
+    await taxi.save();
+    
     return res.status(201).send(responses.success(201, 'Taxi created Successfully', taxi));
   } catch (error) {
     return res.status(500).send(responses.error(500, 'Taxi not created'));

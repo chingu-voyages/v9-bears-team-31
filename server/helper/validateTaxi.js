@@ -20,7 +20,7 @@ export default {
         .required(),
       model: Joi.string()
         .strict()
-        .trim(),
+        .trim()
         .required()
     });
     return Joi.validate(field, schema);
