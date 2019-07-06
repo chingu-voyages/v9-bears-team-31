@@ -11,7 +11,7 @@ taxiRouter.route('/taxis')
   .post(createTaxi)
   .get(findAllTaxi);
   
-taxiRouter.route('/taxis/:id')
+taxiRouter.route('/taxis/:plateNumber')
   .get(findATaxi);
 
 export default taxiRouter;
