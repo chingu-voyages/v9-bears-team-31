@@ -8,23 +8,19 @@ export default {
   // create taxi validation
   validateTaxi: field => {
     const schema = Joi.object().keys({
-      firstName: Joi.string()
+      imageURL: Joi.string()
+        .strict()
+        .trim(),
+      imageID: Joi.string()
+        .strict()
+        .trim(),
+      plateNumber: Joi.string()
         .strict()
         .trim()
         .required(),
-      lastName: Joi.string()
+      model: Joi.string()
         .strict()
-        .trim()
-        .required(),
-      phoneNumber: Joi.string()
-        .strict()
-        .trim()
-        .min(13)
-        .max(14)
-        .required(),
-      password: Joi.string()
-        .min(6)
-        .max(30)
+        .trim(),
         .required()
     });
     return Joi.validate(field, schema);
