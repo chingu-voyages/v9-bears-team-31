@@ -67,9 +67,14 @@ export const findATaxi = async (req, res) => {
 
 export const findAllTaxi = async (req, res) => {
   try {
-    const taxis = await Taxi.find({});
+    let taxis = await Taxi.find().sort({'averageReview': -1});
     if (!taxis || taxis.length === 0) {
-      return res.status(400).send(responses.error(400, 'Taxis not found'));
+      return res.status(404).send(responses.error(404, 'Taxis not found'));
+    }
+    const queryByPlateNumber = req.query.plateNumber;
+    if (queryByPlateNumber) {
+      taxis = taxis.filter(taxi => taxi.plateNumber === queryByPlateNumber);
+      return res.status(200).send(responses.success(200, 'Taxis retrieved Successfully', taxis));
     }
     return res.status(200).send(responses.success(200, 'Taxis retrieved Successfully', taxis));
   } catch (error) {
