@@ -71,6 +71,12 @@ export const findAllTaxi = async (req, res) => {
     if (!taxis || taxis.length === 0) {
       return res.status(404).send(responses.error(404, 'Taxis not found'));
     }
+    const queryByPlateNumber = req.query.plateNumber;
+    if (queryByPlateNumber) {
+      taxis = taxis.filter(taxi => taxi.plateNumber === queryByPlateNumber);
+      return res.status(200).send(responses.success(200, 'Taxis retrieved Successfully', taxis));
+    }
+    console.log('taxis', taxis);
     return res.status(200).send(responses.success(200, 'Taxis retrieved Successfully', taxis));
   } catch (error) {
     return res.status(500).send(responses.error(500, 'Internal server error, taxis could not be found'));
