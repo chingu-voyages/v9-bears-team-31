@@ -1,13 +1,16 @@
+
 .form {
   display: block;
   background: -webkit-linear-gradient(left, #ECAB28, #F4CA3A);
   margin-top: 3%;
   padding: 3%;
   border-radius: 5px;
+  opacity: 0.8;
 }
 
 .container h3 {
   text-align: center;
+  color: aliceblue;
 }
 
 .form-group {
@@ -21,6 +24,6 @@
 @media (max-width: 767px) {
   .container h3 {
     font-size: 1rem;
-    color: rgb(39, 33, 21);
+    color: rgb(255, 255, 255);
   }
 }
