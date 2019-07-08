@@ -20,16 +20,25 @@ export const createTaxi = async (req, res) => {
     let taxi = await Taxi.findOne({plateNumber: field.plateNumber});
     if (taxi) return res.status(409).send(responses.error(409, `Taxi with plate number ${field.plateNumber} already exists`));
 
-    const file = dataUri(req).content;
+    if (req.file) {
+      const file = dataUri(req).content;
 
-    const image = await uploader.upload(file);
+      const image = await uploader.upload(file);
 
-    taxi = new Taxi({
-      imageURL: image.url,
-      imageID: image.public_id,
-      plateNumber: field.plateNumber,
-      model: field.model,
-    });
+      taxi = new Taxi({
+        imageURL: image.url,
+        imageID: image.public_id,
+        plateNumber: field.plateNumber,
+        model: field.model,
+      });
+    } else {
+      taxi = new Taxi({
+        imageURL: '',
+        imageID: '',
+        plateNumber: field.plateNumber,
+        model: field.model,
+      });
+    }
 
     await taxi.save();
     
