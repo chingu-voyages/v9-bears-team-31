@@ -34,7 +34,7 @@ export const login = async (req, res) => {
         userData,
         token,
       };
-      return res.status(200).send(responses.success(200, 'User login Successfully', data));
+      return res.header('x-auth-token', token).status(200).send(responses.success(200, 'User login Successfully', data));
     }
     return res.status(400).send(responses.error(400, 'Incorrect phone number or password'));
   } catch (error) {

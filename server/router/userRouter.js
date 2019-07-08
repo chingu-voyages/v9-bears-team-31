@@ -6,11 +6,13 @@ import {
 import {
   login,
 } from '../controller/authController';
+import auth from '../middleware/auth';
+import admin from '../middleware/admin';
 
 const userRouter = express.Router();
 
 userRouter.route('/users')
-  .get(getUsers)
+  .get([admin, auth], getUsers)
   .post(signUp);
 
 userRouter.route('/login')
