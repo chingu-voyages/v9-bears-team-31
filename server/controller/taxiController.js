@@ -4,6 +4,8 @@ import Taxi from '../model/taxi';
 import Review from '../model/review';
 import responses from '../helper/responses';
 import validateTaxi from '../helper/validateTaxi';
+import { dataUri } from '../middleware/multer';
+import { uploader } from '../cloudinaryConfig';
 
 export const createTaxi = async (req, res) => {
   let field = req.body;
@@ -14,15 +16,29 @@ export const createTaxi = async (req, res) => {
         error: error.details.map(data => data.message).toString()
       });
     }
+    
     let taxi = await Taxi.findOne({plateNumber: field.plateNumber});
     if (taxi) return res.status(409).send(responses.error(409, `Taxi with plate number ${field.plateNumber} already exists`));
 
-    taxi = new Taxi({
-      imageURL: field.imageURL,
-      imageID: field.imageID,
-      plateNumber: field.plateNumber,
-      model: field.model,
-    });
+    if (req.file) {
+      const file = dataUri(req).content;
+
+      const image = await uploader.upload(file);
+
+      taxi = new Taxi({
+        imageURL: image.url,
+        imageID: image.public_id,
+        plateNumber: field.plateNumber,
+        model: field.model,
+      });
+    } else {
+      taxi = new Taxi({
+        imageURL: '',
+        imageID: '',
+        plateNumber: field.plateNumber,
+        model: field.model,
+      });
+    }
 
     await taxi.save();
     
