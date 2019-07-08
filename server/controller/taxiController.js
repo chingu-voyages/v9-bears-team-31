@@ -10,7 +10,6 @@ import { uploader } from '../cloudinaryConfig';
 export const createTaxi = async (req, res) => {
   let field = req.body;
   const { error } = validateTaxi.validateTaxi(field);
-  console.log(field.plateNumber);
   try {
     if (error) {
       return res.status(400).send({
