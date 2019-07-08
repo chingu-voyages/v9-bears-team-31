@@ -6,6 +6,7 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import appRoute from './router/index';
+import { cloudinaryConfig } from './cloudinaryConfig';
 
 
 dotenv.config();
@@ -26,6 +27,7 @@ mongoose.connect(process.env.DBURL, {
 const app = express();
 app.use(cors());
 app.set('port', process.env.PORT);
+app.use('*', cloudinaryConfig);
 
 app.use(bodyParser.json({
   type: 'application/json',
