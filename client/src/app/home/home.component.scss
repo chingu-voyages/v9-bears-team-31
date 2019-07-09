@@ -7,13 +7,14 @@ article {
 }
 
 .container {
-  flex-grow: 1;
+  // flex-grow: 1;
   background: url('../../assets/img/banner-img2.png') no-repeat;
   height: 100vh;
   background-size:contain;
   background-position:right;
+  margin-top: 4rem;
   background-size: 80%;
-
+  position: fixed;
 }
 
 .header {
@@ -28,7 +29,7 @@ article {
 .sub-heading {
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   font-size: 1.2rem;
-  color: rgb(32, 32, 29);
+  color: rgb(255, 255, 255);
 }
 
 footer {
@@ -36,6 +37,8 @@ footer {
   background: #ecab27;
   margin: 0;
   padding: 0;
+  justify-self: end;
+  margin-top: 42rem;
 }
 
 /*
@@ -65,17 +68,17 @@ footer {
   ##Screen = B/w 768px to 1024px
 */
 
-@media (min-width: 768px) and (max-width: 1024px) {
+@media (min-width: 767px) and (max-width: 1024px) {
 
   .container {
     background-position:right;
-    margin-top: -20rem;
+    margin-top: 12rem;
     background-size: 80%;
   }
 
   .header {
     font-size: 1.8rem;
-    margin-top: 20rem;
+    margin-top: 6rem;
     margin-left: 0;
     padding: 1rem;
     text-align: left;
@@ -86,6 +89,11 @@ footer {
   }
   .sub-heading {
     font-size: .9rem;
+    color: #000000;
+  }
+
+  footer {
+    margin-top: 54rem;
   }
 
 }
@@ -130,6 +138,7 @@ footer {
   }
   .sub-heading {
     font-size: .9rem;
+    color: #000000;
   }
 
 }
@@ -142,13 +151,13 @@ footer {
 @media (min-width: 320px) and (max-width: 480px) {
   .container {
     background-position:right;
-    margin-top: -14rem;
+    margin-top: 8rem;
     background-size: 80%;
   }
 
   .header {
     font-size: 1.4rem;
-    margin-top: 14rem;
+    margin-top: 4rem;
     margin-left: 0;
     padding: 1rem;
     text-align: left;
@@ -159,6 +168,10 @@ footer {
   }
   .sub-heading {
     font-size: 0.8rem;
+    color: #000000;
+  }
+  footer {
+    margin-top: 33rem;
   }
 }
 

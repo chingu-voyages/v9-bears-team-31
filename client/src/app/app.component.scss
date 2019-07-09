@@ -17,13 +17,19 @@
 }
 
 .mat-drawer-content {
-  background: -webkit-linear-gradient(left, #eceecf, #92884c);
+  background: url('../assets/img/nightfall.jpg') no-repeat;
+  background-size: 100%;
+  // height: 100vh;
+  // background: -webkit-linear-gradient(left, #eceecf, #92884c);
 }
 
-@media (min-width: 481px) and (max-width: 767px) {
+@media (min-width: 481px) and (max-width: 769px) {
   .mat-drawer a {
     width: 6rem;
     text-align: center;
+  }
+  .mat-drawer-content {
+    background-size: 100% 100%;
   }
 }
 
@@ -31,6 +37,9 @@
   .mat-drawer a {
     width: 6rem;
     text-align: center;
+  }
+  .mat-drawer-content {
+    background-size: 100% 100%;
   }
 }
 

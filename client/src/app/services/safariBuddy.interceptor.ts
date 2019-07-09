@@ -22,7 +22,7 @@ export class SafariBuddyInterceptor implements HttpInterceptor {
       // clone the incoming request and add JWT token in the cloned request's Authorization Header
       request = request.clone({
           setHeaders: {
-              Authorization: `Bearer ${currentUser.data.token}`
+              'x-auth-token': `currentUser.data.token`
           }
       });
     }

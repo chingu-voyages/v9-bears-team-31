@@ -1,13 +1,25 @@
+@import url('https://fonts.googleapis.com/css?family=Kaushan+Script&display=swap');
+.app-name h1 {
+  display: block;
+  justify-content: center;
+  margin-left: 10rem;
+  font-family: 'Kaushan Script', cursive;
+  font-size: 7rem;
+  color: white;
+  margin-top: 16%;
+}
 .form {
   display: block;
-  background: -webkit-linear-gradient(left, #ECAB28, #F4CA3A);
-  margin-top: 3%;
+  background: #FFDD03;
+  margin-top: 20%;
   padding: 3%;
   border-radius: 5px;
 }
 
 .container h3 {
   text-align: center;
+  color: #0A0A0A;
+  font-size: 1rem;
 }
 
 .form-group {
@@ -18,9 +30,39 @@
   justify-content: center;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 769px) {
+  .row {
+    display: flex;
+    flex-direction: column-reverse;
+  }
   .container h3 {
     font-size: 1rem;
-    color: rgb(39, 33, 21);
+    color: #0A0A0A;
   }
+  .app-name h1 {
+    margin-top: 5%;
+    margin-left: 0;
+    text-align: center;
+    font-size: 4rem;
+  }
+  .with-form {
+    width: 100%
+  }
+  .form {
+    margin-top: 10%;
+  }
+
+}
+
+@media (max-width: 480px) {
+  .row {
+    flex-direction: column-reverse;
+  }
+  .app-name h1 {
+    margin-left: 0;
+    text-align: center;
+    font-size: 3rem;
+    margin-top: 10%;
+  }
+  
 }
