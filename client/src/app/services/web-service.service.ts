@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { tap } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 import { User } from './model';
@@ -96,6 +96,18 @@ export class WebServiceService {
       sessionStorage.removeItem(credentialsKey);
       localStorage.removeItem(credentialsKey);
     }
+  }
+
+  getTaxiCollection(filter = '' ): Observable<any> {
+    return this.http.get<any>('http://127.0.0.1:3300/api/v1/taxis', {
+      params: new HttpParams()
+        .set('plateNumber', filter)
+    })
+      .pipe(
+        tap((data: any) => {
+          return of(data);
+        })
+      );
   }
 
 }
