@@ -97,7 +97,15 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     );
 
     this.windowRef = this.win.windowRef;
-    const new_firebase = firebase.initializeApp(environment.firebase);
+    try {
+      firebase.initializeApp(environment.firebase);
+    } catch (error) {
+      console.log('firebase error', error);
+    }
+
+    const new_firebase = firebase;
+
+
     this.windowRef.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
       size: 'invisible',
       callback(response: any) {

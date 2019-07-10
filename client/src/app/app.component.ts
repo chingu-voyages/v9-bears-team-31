@@ -7,11 +7,13 @@ import {
 import { MediaMatcher } from '@angular/cdk/layout';
 import { MatSidenav, MatSnackBar } from '@angular/material';
 import { IosInstallComponent } from './ios-install/ios-install.component';
+import { slideInAnimation } from './app.animation';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  animations: [slideInAnimation]
 })
 export class AppComponent implements OnInit {
   title = 'Safari Buddy';

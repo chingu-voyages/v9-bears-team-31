@@ -23,6 +23,11 @@
   // background: -webkit-linear-gradient(left, #eceecf, #92884c);
 }
 
+.mat-list-item .active {
+  background: #27295C;
+  color: rgb(239, 243, 16);
+}
+
 @media (min-width: 481px) and (max-width: 769px) {
   .mat-drawer a {
     width: 6rem;
