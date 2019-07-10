@@ -30,6 +30,10 @@ export class AppComponent implements OnInit {
     {
       title: 'Register',
       path: '/register'
+    },
+    {
+      title: 'Dashboard',
+      path: '/dashboard'
     }
   ];
 // tslint:disable-next-line: variable-name
