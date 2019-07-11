@@ -28,7 +28,11 @@ export class TaxiDataSource implements DataSource<any> {
         catchError(() => of([])),
         finalize(() => this.loadingSubject.next(false))
       )
-      .subscribe((taxiData: any) => this.taxiDataSubject.next(taxiData));
+      .subscribe((taxiData: any) => {
+        console.log('my taxi', taxiData);
+        this.taxiDataSubject.next(taxiData.data);
+      }
+      );
   }
 
 }

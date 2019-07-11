@@ -12,10 +12,10 @@ import admin from '../middleware/admin';
 const taxiRouter = express.Router();
 
 taxiRouter.route('/taxis')
-  .post([auth, multerUploads], createTaxi)
-  .get(auth, findAllTaxi);
+  .post([multerUploads], createTaxi)
+  .get(findAllTaxi);
   
 taxiRouter.route('/taxis/:plateNumber')
-  .get(auth, findATaxi);
+  .get(findATaxi);
 
 export default taxiRouter;

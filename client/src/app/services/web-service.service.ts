@@ -99,6 +99,8 @@ export class WebServiceService {
   }
 
   getTaxiCollection(filter = '' ): Observable<any> {
+    console.log('filter', filter);
+    
     return this.http.get<any>('http://127.0.0.1:3300/api/v1/taxis', {
       params: new HttpParams()
         .set('plateNumber', filter)

@@ -1,6 +1,46 @@
 <div class="main row">
   <div class="col-md-8 main-content">
-    Main Content Area
+      <h1>
+          {{ title }}
+      </h1>
+      <mat-form-field>
+        <input matInput placeholder="Search Meteotrite data" #input>
+      </mat-form-field>
+
+      <div class="mat-elevation-z8">
+          <div class="spinner-container" *ngIf="taxiDataSource.loading | async">
+
+              <mat-spinner></mat-spinner>
+
+          </div>
+        <table mat-table [dataSource]="taxiDataSource"
+        matSort matSortActive="review" matSortDirection="asc" matSortDisableClear >
+            <!-- Image Column -->
+        <ng-container matColumnDef="image">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Thumbnail </th>
+          <td mat-cell *matCellDef="let row"><img [attr.src]="row.imageURL" width="5%" height="auto" /> </td>
+        </ng-container>
+
+        <!-- Plate Number Column -->
+        <ng-container matColumnDef="plateNumber">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Number Plate </th>
+          <td mat-cell *matCellDef="let row"> {{row.plateNumber}} </td>
+        </ng-container>
+
+        <!-- Review Column -->
+        <ng-container matColumnDef="review">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Average Review </th>
+          <td mat-cell *matCellDef="let row"><ngb-rating
+            [(rate)]="row.averageReview"
+            [readonly]="true" max="5"></ngb-rating></td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+        </tr>
+        </table>
+        <mat-paginator [length]=20 [pageSize]="5" [pageSizeOptions]="[5, 10, 25]"></mat-paginator>
+      </div>
   </div>
   <div class="col-md-4 right-sidebar">
     Right Sidebar Items

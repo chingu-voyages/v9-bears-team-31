@@ -18,6 +18,7 @@ import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { InternationalPhoneNumberModule } from 'ngx-international-phone-number';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     HttpClientModule,
     BsDropdownModule.forRoot(),
     NgxIntlTelInputModule,
-    InternationalPhoneNumberModule
+    InternationalPhoneNumberModule,
+    NgbModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: SafariBuddyInterceptor, multi: true},

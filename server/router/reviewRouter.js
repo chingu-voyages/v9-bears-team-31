@@ -5,6 +5,6 @@ import auth from '../middleware/auth';
 const reviewRouter = express.Router();
 
 reviewRouter.route('/review')
-  .post(auth, review);
+  .post(review);
 
 export default reviewRouter;
