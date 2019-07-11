@@ -1,0 +1,32 @@
+* {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+.mat-drawer-content {
+  background: #ffffff !important;
+}
+
+.main-content {
+  background: red;
+  height: 100vh;
+  overflow-x: hidden;
+  overflow-x: auto;
+}
+
+.right-sidebar {
+  background: orange;
+}
+
+.right-sidebar-items {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile {
+  background: blue;
+}
+
+.new-review {
+  background: green;
+}
