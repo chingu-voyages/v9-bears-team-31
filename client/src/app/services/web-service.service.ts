@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { tap } from 'rxjs/operators';
-import { Observable, of } from 'rxjs';
-import { User } from './model';
+import { tap, catchError } from 'rxjs/operators';
+import { Observable, of, throwError } from 'rxjs';
+import { User, Taxi } from './model';
 import { LoginContext } from './model';
 
 const credentialsKey = 'currentUser';
@@ -100,7 +100,7 @@ export class WebServiceService {
 
   getTaxiCollection(filter = '' ): Observable<any> {
     console.log('filter', filter);
-    
+
     return this.http.get<any>('http://127.0.0.1:3300/api/v1/taxis', {
       params: new HttpParams()
         .set('plateNumber', filter)
@@ -110,6 +110,48 @@ export class WebServiceService {
           return of(data);
         })
       );
+  }
+
+  getTaxi(numberPlate: string): Observable<Taxi> {
+    if (numberPlate === null || numberPlate === undefined) {
+      return of(this.initializeTaxi());
+    }
+    const url = `http://127.0.0.1:3300/api/v1/taxis/${numberPlate}`;
+    return this.http.get<Taxi>(url)
+      .pipe(
+        tap(data => of(data)),
+        catchError(this.handleError)
+      );
+  }
+
+  private initializeTaxi(): Taxi {
+    // Return an initialized object
+    return {
+      averageReview: null,
+      imageURL: null,
+      imageID: null,
+      plateNumber: null,
+      model: null,
+      createdAt: null,
+      updatedAt: null,
+      review: null
+    };
+  }
+
+  private handleError(err: { error: { message: any; }; status: any; body: { error: any; }; }) {
+    // in a real world app, we may send the server to some remote logging infrastructure
+    // instead of just logging it to the console
+    let errorMessage: string;
+    if (err.error instanceof ErrorEvent) {
+      // A client-side or network error occurred. Handle it accordingly.
+      errorMessage = `An error occurred: ${err.error.message}`;
+    } else {
+      // The backend returned an unsuccessful response code.
+      // The response body may contain clues as to what went wrong,
+      errorMessage = `Backend returned code ${err.status}: ${err.body.error}`;
+    }
+    console.error(err);
+    return throwError(errorMessage);
   }
 
 }
