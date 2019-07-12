@@ -20,6 +20,7 @@ export const review = async (req, res) => {
       userPhoneNumber: field.userPhoneNumber,
       taxiPlateNumber: field.taxiPlateNumber,
       userReview: field.userReview,
+      userComment: field.userComment,
     });
 
     await review.save();
