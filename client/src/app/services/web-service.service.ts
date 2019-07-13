@@ -64,6 +64,18 @@ export class WebServiceService {
     return of(true);
   }
 
+  // post review
+  rate(userRating: any): Observable<any> {
+    console.log('user ratings services', userRating);
+
+    return this.http.post<any>('http://127.0.0.1:3300/api/v1/review', userRating)
+      .pipe(
+        tap((rating: any) => {
+          return of(rating);
+        })
+      );
+  }
+
   /**
    * Checks is the user is authenticated.
    * @return True if the user is authenticated.

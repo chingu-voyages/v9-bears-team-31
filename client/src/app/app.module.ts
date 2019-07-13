@@ -20,6 +20,7 @@ import { InternationalPhoneNumberModule } from 'ngx-international-phone-number';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TaxiDetailComponent } from './dashboard/taxi-detail.component';
+import { TaxiReviewModalComponent } from './dashboard/taxi-review-modal.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { TaxiDetailComponent } from './dashboard/taxi-detail.component';
     LoginComponent,
     RegisterComponent,
     DashboardComponent,
-    TaxiDetailComponent
+    TaxiDetailComponent,
+    TaxiReviewModalComponent
   ],
   imports: [
     BrowserModule,
@@ -50,6 +52,6 @@ import { TaxiDetailComponent } from './dashboard/taxi-detail.component';
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
   ],
   bootstrap: [AppComponent],
-  entryComponents: [IosInstallComponent]
+  entryComponents: [IosInstallComponent, TaxiReviewModalComponent]
 })
 export class AppModule { }

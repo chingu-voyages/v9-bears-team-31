@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+
 import { Taxi, TaxiResolved } from '../services';
+import { TaxiReviewModalComponent } from './taxi-review-modal.component';
 
 @Component({
   templateUrl: './taxi-detail.component.html',
@@ -12,7 +15,7 @@ export class TaxiDetailComponent implements OnInit {
   taxi: Taxi;
   errorMessage: string;
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     const resolvedData: TaxiResolved =
@@ -29,5 +32,16 @@ export class TaxiDetailComponent implements OnInit {
     } else {
       this.pageTitle = 'No taxi found';
     }
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(TaxiReviewModalComponent, {
+      width: '300px',
+      data: {taxi: this.taxi}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      // this.animal = result;
+    });
   }
 }
