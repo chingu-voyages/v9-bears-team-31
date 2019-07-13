@@ -6,6 +6,10 @@ import {FormGroup, FormBuilder} from '@angular/forms';
 import { WebServiceService } from '../services';
 import { TaxiDataSource } from './taxi.datasource';
 
+import { MatDialog } from '@angular/material';
+import { TaxiNewComponent } from './taxi-new.component';
+
+
 
 @Component({
   selector: 'app-dashboard',
@@ -24,7 +28,10 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
   displayedColumns: string[] = ['image', 'plateNumber', 'review'];
 
-  constructor(private webService: WebServiceService, private builder: FormBuilder) { }
+  constructor(
+    private webService: WebServiceService,
+    private builder: FormBuilder,
+    public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.taxiDataSource = new TaxiDataSource(this.webService);
@@ -56,6 +63,16 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   loadTaxiDataPage() {
     const searchValue = this.searchForm.getRawValue();
     this.taxiDataSource.loadTaxiData(this.input.nativeElement.value);
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(TaxiNewComponent, {
+      width: '400px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      // TODO
+    });
   }
 
 }

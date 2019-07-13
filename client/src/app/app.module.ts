@@ -22,6 +22,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TaxiDetailComponent } from './dashboard/taxi-detail.component';
 import { TaxiReviewModalComponent } from './dashboard/taxi-review-modal.component';
 import { TaxiNewComponent } from './dashboard/taxi-new.component';
+import { FileUploadComponent } from './file-upload/file-upload.component';
+import { ProgressComponent } from './progress/progress.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,9 @@ import { TaxiNewComponent } from './dashboard/taxi-new.component';
     DashboardComponent,
     TaxiDetailComponent,
     TaxiReviewModalComponent,
-    TaxiNewComponent
+    TaxiNewComponent,
+    FileUploadComponent,
+    ProgressComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +51,7 @@ import { TaxiNewComponent } from './dashboard/taxi-new.component';
     BsDropdownModule.forRoot(),
     NgxIntlTelInputModule,
     InternationalPhoneNumberModule,
-    NgbModule
+    NgbModule,
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: SafariBuddyInterceptor, multi: true},

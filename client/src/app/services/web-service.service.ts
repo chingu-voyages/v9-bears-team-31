@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { tap, catchError } from 'rxjs/operators';
-import { Observable, of, throwError } from 'rxjs';
+import { HttpClient, HttpParams, HttpEvent, HttpEventType, HttpResponse } from '@angular/common/http';
+import { tap, catchError, filter, map } from 'rxjs/operators';
+import { Observable, of, throwError, pipe } from 'rxjs';
 import { User, Taxi } from './model';
 import { LoginContext } from './model';
 
@@ -80,7 +80,10 @@ export class WebServiceService {
   taxi(taxi: any): Observable<any> {
     console.log('new taxi', taxi);
 
-    return this.http.post<any>('http://127.0.0.1:3300/api/v1/taxis', taxi)
+    return this.http.post<any>('http://127.0.0.1:3300/api/v1/taxis', toFormData(taxi), {
+      reportProgress: true,
+      observe: 'events'
+    })
       .pipe(
         tap((newTaxi: any) => {
           return of(newTaxi);
@@ -178,4 +181,30 @@ export class WebServiceService {
     return throwError(errorMessage);
   }
 
+}
+
+export function toFormData<T>( formValue: T ) {
+  const formData = new FormData();
+
+  for ( const key of Object.keys(formValue) ) {
+      const value = formValue[key];
+      formData.append(key, value);
+  }
+
+  return formData;
+}
+
+export function uploadProgress<T>(cb: (progress: number) => void) {
+  return tap((event: HttpEvent<T>) => {
+      if (event.type === HttpEventType.UploadProgress) {
+          cb(Math.round((100 * event.loaded) / event.total));
+      }
+  });
+}
+
+export function toResponseBody<T>() {
+  return pipe(
+      filter((event: HttpEvent<T>) => event.type === HttpEventType.Response),
+      map((res: HttpResponse<T>) => res.body)
+  );
 }
