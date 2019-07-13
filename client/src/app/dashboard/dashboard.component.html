@@ -1,12 +1,16 @@
 <div class="main row">
   <div class="col-md-8 main-content">
-      <h1>
+    <div class="header-dashboard">
+        <mat-form-field>
+          <input matInput placeholder="Search Meteotrite data" #input>
+        </mat-form-field>
+        <div class="create-taxi">
+          <button mat-raised-button color="primary" class="create-taxi-button">Add New Taxi Review</button>
+        </div>
+    </div>
+      <!-- <h1>
           {{ title }}
-      </h1>
-      <mat-form-field>
-        <input matInput placeholder="Search Meteotrite data" #input>
-      </mat-form-field>
-
+      </h1> -->
       <div class="mat-elevation-z8">
           <div class="spinner-container" *ngIf="taxiDataSource.loading | async">
 

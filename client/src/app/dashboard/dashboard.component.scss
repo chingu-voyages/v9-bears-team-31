@@ -9,10 +9,27 @@
 }
 
 .main-content {
-  background: red;
+  background: #262858;
   height: 100vh;
   overflow-x: hidden;
   overflow-x: auto;
+}
+
+.main-content .header-dashboard {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 20px;
+  margin-bottom: 10px;
+}
+
+::ng-deep .mat-form-field-placeholder{
+
+  color: #ffffff !important;
+}
+
+::ng-deep .mat-form-field-underline{
+  background-color:#FFFFFF;
 }
 
 .right-sidebar {
