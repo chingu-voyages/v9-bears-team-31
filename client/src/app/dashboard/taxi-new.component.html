@@ -1,0 +1,17 @@
+<h1 mat-dialog-title>Post New Taxi Rating</h1>
+
+  <form [formGroup]="formReview">
+    <ngb-rating
+              [readonly]="flase" max="5"
+              formControlName="userReview"
+              style=" font-size: 1.5rem; color: #F3A41A;">
+    </ngb-rating>
+    <mat-form-field>
+      <textarea matInput name="comment" id="comment" placeholder="Reason for this Rating" formControlName="comment"></textarea>
+    </mat-form-field>
+    <div mat-dialog-actions>
+      <button mat-button  cdkFocusInitial (click)="sendReview(data.taxi)" mat-dialog-close>Add Review</button>
+      <button mat-button  (click)="onNoClick()">Cancel</button>
+    </div>
+  </form>
+

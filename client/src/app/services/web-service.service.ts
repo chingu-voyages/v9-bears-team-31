@@ -76,6 +76,18 @@ export class WebServiceService {
       );
   }
 
+  // post review
+  taxi(taxi: any): Observable<any> {
+    console.log('new taxi', taxi);
+
+    return this.http.post<any>('http://127.0.0.1:3300/api/v1/taxis', taxi)
+      .pipe(
+        tap((newTaxi: any) => {
+          return of(newTaxi);
+        })
+      );
+  }
+
   /**
    * Checks is the user is authenticated.
    * @return True if the user is authenticated.

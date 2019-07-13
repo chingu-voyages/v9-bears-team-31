@@ -21,6 +21,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TaxiDetailComponent } from './dashboard/taxi-detail.component';
 import { TaxiReviewModalComponent } from './dashboard/taxi-review-modal.component';
+import { TaxiNewComponent } from './dashboard/taxi-new.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { TaxiReviewModalComponent } from './dashboard/taxi-review-modal.componen
     RegisterComponent,
     DashboardComponent,
     TaxiDetailComponent,
-    TaxiReviewModalComponent
+    TaxiReviewModalComponent,
+    TaxiNewComponent
   ],
   imports: [
     BrowserModule,
@@ -52,6 +54,6 @@ import { TaxiReviewModalComponent } from './dashboard/taxi-review-modal.componen
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
   ],
   bootstrap: [AppComponent],
-  entryComponents: [IosInstallComponent, TaxiReviewModalComponent]
+  entryComponents: [IosInstallComponent, TaxiReviewModalComponent, TaxiNewComponent]
 })
 export class AppModule { }
