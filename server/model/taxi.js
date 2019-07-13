@@ -26,4 +26,7 @@ const taxiSchema = new Schema({
   timestamps: true,
 });
 
+taxiSchema.index({
+  "$**": "text"
+});
 export default mongoose.model('Taxi', taxiSchema);
