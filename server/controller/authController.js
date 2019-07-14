@@ -27,6 +27,7 @@ export const login = async (req, res) => {
         id: user._id,
         phoneNumber: user.email,
         firstName: user.firstName,
+        isAdmin: user.isAdmin,
       };
       const token = await generateToken(userObj);
       const userData = _.pick(user, ['firstName', 'lastName', 'phoneNumber', 'isAdmin', 'createdAt', 'updatedAt']);
