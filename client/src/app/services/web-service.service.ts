@@ -73,8 +73,6 @@ export class WebServiceService {
 
   // post review
   rate(userRating: any): Observable<any> {
-    console.log('user ratings services', userRating);
-
     return this.http.post<any>('http://127.0.0.1:3300/api/v1/review', userRating)
       .pipe(
         tap((rating: any) => {
@@ -85,8 +83,6 @@ export class WebServiceService {
 
   // post review
   taxi(taxi: any): Observable<any> {
-    console.log('new taxi', taxi);
-
     return this.http.post<any>('http://127.0.0.1:3300/api/v1/taxis', toFormData(taxi), {
       reportProgress: true,
       observe: 'events'
@@ -134,8 +130,6 @@ export class WebServiceService {
 
 
   getTaxiCollection(filter = '' ): Observable<any> {
-    console.log('filter', filter);
-
     return this.http.get<any>('http://127.0.0.1:3300/api/v1/taxis', {
       params: new HttpParams()
         .set('plateNumber', filter)

@@ -102,7 +102,6 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     try {
       firebase.initializeApp(environment.firebase);
     } catch (error) {
-      console.log('firebase error', error);
     }
 
     const new_firebase = firebase;
@@ -111,7 +110,6 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     this.windowRef.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
       size: 'invisible',
       callback(response: any) {
-        console.log(response);
       }
     });
 
@@ -139,7 +137,6 @@ export class RegisterComponent implements OnInit, AfterViewInit {
 
   sendLoginCode() {
     this.phoneNumber = this.verifyForm.get('phone').value;
-    console.log(this.phoneNumber);
     if (localStorage.getItem(this.phoneNumber)) {
       // already got the verification code once, so show the register form
       this.user = localStorage.getItem(this.phoneNumber);
@@ -151,11 +148,10 @@ export class RegisterComponent implements OnInit, AfterViewInit {
         .auth()
         .signInWithPhoneNumber(this.phoneNumber, appVerifier)
         .then(result => {
-          console.log('result', result);
           this.windowRef.confirmationResult = result;
           this.verificationCode = true;
         })
-        .catch(error => console.log('this errror occurred: ', error));
+        .catch(error => error);
     }
 
     if (this.verificationCode) {
@@ -174,7 +170,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
         const hideDiv = document.getElementById('verify_phone');
         hideDiv.style.display = 'none';
       })
-      .catch((error: any) => console.log('Incorrect code entered?: ', error));
+      .catch((error: any) => error);
   }
 
   userSignUp(): void {

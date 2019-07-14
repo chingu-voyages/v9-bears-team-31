@@ -26,12 +26,9 @@ export class TaxiReviewModalComponent implements OnInit {
   }
 
   sendReview(data: any) {
-    console.log('whole data', data);
-    console.log('data phone', data.taxi.plateNumber);
     const formValue = this.formReview.getRawValue();
     const rating = formValue.userReview;
     const comment = formValue.comment;
-    console.log('rating', rating);
 
     const makeReview = {
       taxiPlateNumber: data.taxi.plateNumber,
@@ -44,10 +41,8 @@ export class TaxiReviewModalComponent implements OnInit {
       .subscribe((rateRes: any) => {
         if (rateRes.success) {
           this.toastr.success(`Your Review was Successful`, 'Thank you');
-          console.log('review response', rateRes.data );
         } else {
           this.toastr.error(`please try again`, 'Not Successful');
-          console.log('failed to post review');
         }
       });
   }

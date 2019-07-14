@@ -60,8 +60,7 @@ export class TaxiNewComponent implements OnInit {
         if (rateRes.success) {
           this.loading = true;
           this.hasRated = true;
-           this.toastr.success(`Still working . . ., wait for final verdict`);
-          console.log('review response', rateRes.data );
+          this.toastr.success(`Still working . . ., wait for final verdict`);
           this.webService.taxi(
             {
               taxiImage: image,
@@ -79,16 +78,13 @@ export class TaxiNewComponent implements OnInit {
               this.loading = false;
               if (newTaxis.success) {
                 this.toastr.success(`New Taxi Review Successful`, 'Thank you');
-                console.log('new taxi created and rated', newTaxis.data);
               } else {
                 this.toastr.error(`please try again`, 'Not Successful');
-                console.log('failed to create taxi', newTaxis.message);
               }
             });
         } else {
           this.loading = false;
           this.toastr.error(`please try again`, 'Not Successful');
-          console.log('failed to post review');
         }
       });
   }

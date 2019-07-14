@@ -33,7 +33,6 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.loading = true;
-    console.log(this.loginForm.value);
     this.webServivce.login(this.loginForm.value)
       .pipe(
         finalize(() => {
@@ -43,7 +42,6 @@ export class LoginComponent implements OnInit {
       )
       .subscribe((credentials: any) => {
         if (credentials.success) {
-          console.log('login successful');
           this.toastr.success(`Howdy, ${credentials.data.userData.firstName}`);
           // this.webServivce.notify('info', `Welcome to Safari Buddy ${credentials.data.userData.firstName}`, 'top', 'right');
           this.route.queryParams.subscribe(params => {

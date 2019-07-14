@@ -25,12 +25,10 @@ export class TaxiResolver implements Resolve<TaxiResolved> {
     return this.taxiService.getTaxi(numberPlate)
       .pipe(
         map(taxi => {
-          console.log('specific taxi', taxi);
           return {taxi};
         }),
         catchError(error => {
           const message = `Failed to get taxi error: ${error}`;
-          console.log(message);
           return of({taxi: null, error: message});
         })
       )
