@@ -1,0 +1,86 @@
+<div class="main row">
+  <mat-card class="col-md-8 main-content">
+    <div class="taxi-details">
+        <mat-card class="example-card">
+          <mat-card-header>
+            <mat-card-title>Taxi Details</mat-card-title>
+            <mat-card-subtitle>{{ taxi.taxi.plateNumber }}</mat-card-subtitle>
+          </mat-card-header>
+          <img mat-card-image src="{{taxi.taxi.imageURL}}"
+            onError="this.src='../../assets/img/default.jpg';"
+            alt="Taxi Image">
+          <mat-card-content>
+              <strong>Model: </strong> <button mat-button>{{taxi.taxi.model}}</button>
+              <strong>Added On: </strong> <button mat-button>{{taxi.taxi.createdAt | date}}</button>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-button><ngb-rating
+              [(rate)]="taxi.taxi.averageReview"
+              [readonly]="true" max="5"
+              style=" font-size: 1.5rem; color: #F3A41A;"></ngb-rating></button>
+            <button mat-button>{{taxi.taxi.averageReview}}</button>
+            <button mat-button  mat-raised-button color="warn" (click)="openDialog()">Add Review</button>
+          </mat-card-actions>
+        </mat-card>
+    </div>
+    <div class="taxi-reviews">
+      <h3>User Reviews</h3>
+      <div class="reviews" *ngFor="let taxiReview of taxi.review">
+          <mat-card class="single-review">
+            <mat-card-header>
+                <mat-card-subtitle><strong>Reviewer:</strong> &nbsp; &nbsp;{{taxiReview.userPhoneNumber}}</mat-card-subtitle>
+            </mat-card-header>
+            <hr>
+            <mat-card-content>
+              <div class="stars"><strong>Stars: &nbsp; &nbsp;</strong> <ngb-rating
+              [(rate)]="taxiReview.userReview"
+              [readonly]="true" max="5"
+              style="color: #F3A41A;">
+              </ngb-rating></div>
+              <div class="createdAt">
+                <strong>Reviewed On: &nbsp; &nbsp;</strong> {{taxiReview.createdAt | date }}
+              </div>
+              <div class="comment">
+                <strong>Comments</strong>
+                <div>{{taxiReview.userComment}}</div>
+              </div>
+            </mat-card-content>
+          </mat-card>
+      </div>
+    </div>
+  </mat-card>
+  <div class="col-md-4 right-sidebar">
+      <div class="right-sidebar-items">
+        <div class="profile m-2">
+          <mat-card>
+            <mat-card-title>
+              My Profile
+            </mat-card-title>
+            <hr>
+            <mat-card-content>
+              <div class="username"><strong>User Name: &nbsp; &nbsp; &nbsp; &nbsp;</strong>{{userName}}</div>
+              <div class="contact-number"><strong>Contact: &nbsp; &nbsp; &nbsp; &nbsp;</strong> {{phoneNumber}}</div>
+              <div class="date-joined"><strong>Joined On: &nbsp; &nbsp; &nbsp; &nbsp;</strong>{{joinedOn | date}}</div>
+            </mat-card-content>
+            <mat-card-actions>
+              <button mat-raised-button color="accent" (click)="logout()">LOG OUT</button>
+            </mat-card-actions>
+          </mat-card>
+        </div>
+        <hr>
+        <div class="new-review m-2">
+            <mat-card>
+                <mat-card-title>
+                 Safari Buddy Statistics
+                </mat-card-title>
+                <hr>
+                <mat-card-content>
+                  <p>Coming soon !!!!</p>
+                </mat-card-content>
+              </mat-card>
+        </div>
+      </div>
+    </div>
+</div>
+
+

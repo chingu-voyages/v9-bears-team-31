@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { tap } from 'rxjs/operators';
-import { Observable, of } from 'rxjs';
-import { User } from './model';
+import { HttpClient, HttpParams, HttpEvent, HttpEventType, HttpResponse } from '@angular/common/http';
+import { tap, catchError, filter, map } from 'rxjs/operators';
+import { Observable, of, throwError, pipe, BehaviorSubject } from 'rxjs';
+import { User, Taxi } from './model';
 import { LoginContext } from './model';
+
+declare var $: any;
 
 const credentialsKey = 'currentUser';
 
@@ -20,6 +22,11 @@ export class WebServiceService {
   };
 
   private _credentials: User | null;
+  private loggedIn = new BehaviorSubject<boolean>(this.isAuthenticated());
+
+  get isLoggedIn() {
+    return this.loggedIn.asObservable();
+  }
 
   constructor(private http: HttpClient) {
     const savedCredentials = sessionStorage.getItem(credentialsKey) || localStorage.getItem(credentialsKey);
@@ -64,6 +71,29 @@ export class WebServiceService {
     return of(true);
   }
 
+  // post review
+  rate(userRating: any): Observable<any> {
+    return this.http.post<any>('http://127.0.0.1:3300/api/v1/review', userRating)
+      .pipe(
+        tap((rating: any) => {
+          return of(rating);
+        })
+      );
+  }
+
+  // post review
+  taxi(taxi: any): Observable<any> {
+    return this.http.post<any>('http://127.0.0.1:3300/api/v1/taxis', toFormData(taxi), {
+      reportProgress: true,
+      observe: 'events'
+    })
+      .pipe(
+        tap((newTaxi: any) => {
+          return of(newTaxi);
+        })
+      );
+  }
+
   /**
    * Checks is the user is authenticated.
    * @return True if the user is authenticated.
@@ -98,4 +128,99 @@ export class WebServiceService {
     }
   }
 
+
+  getTaxiCollection(filter = '' ): Observable<any> {
+    return this.http.get<any>('http://127.0.0.1:3300/api/v1/taxis', {
+      params: new HttpParams()
+        .set('plateNumber', filter)
+    })
+      .pipe(
+        tap((data: any) => {
+          return of(data);
+        })
+      );
+  }
+
+  getTaxi(numberPlate: string): Observable<Taxi> {
+    if (numberPlate === null || numberPlate === undefined) {
+      return of(this.initializeTaxi());
+    }
+    const url = `http://127.0.0.1:3300/api/v1/taxis/${numberPlate}`;
+    return this.http.get<Taxi>(url)
+      .pipe(
+        tap(data => of(data)),
+        catchError(this.handleError)
+      );
+  }
+
+  private initializeTaxi(): Taxi {
+    // Return an initialized object
+    return {
+      averageReview: null,
+      imageURL: null,
+      imageID: null,
+      plateNumber: null,
+      model: null,
+      createdAt: null,
+      updatedAt: null,
+      review: null
+    };
+  }
+
+  private handleError(err: { error: { message: any; }; status: any; body: { error: any; }; }) {
+    // in a real world app, we may send the server to some remote logging infrastructure
+    // instead of just logging it to the console
+    let errorMessage: string;
+    if (err.error instanceof ErrorEvent) {
+      // A client-side or network error occurred. Handle it accordingly.
+      errorMessage = `An error occurred: ${err.error.message}`;
+    } else {
+      // The backend returned an unsuccessful response code.
+      // The response body may contain clues as to what went wrong,
+      errorMessage = `Backend returned code ${err.status}: ${err.body.error}`;
+    }
+    console.error(err);
+    return throwError(errorMessage);
+  }
+
+  notify(type: string, message: string, from: string, align: string) {
+    $.notify({
+        icon: 'notifications',
+        message
+    }, {
+        type,
+        timer: 3000,
+        placement: {
+            from,
+            align
+        }
+    });
+  }
+
+}
+
+export function toFormData<T>( formValue: T ) {
+  const formData = new FormData();
+
+  for ( const key of Object.keys(formValue) ) {
+      const value = formValue[key];
+      formData.append(key, value);
+  }
+
+  return formData;
+}
+
+export function uploadProgress<T>(cb: (progress: number) => void) {
+  return tap((event: HttpEvent<T>) => {
+      if (event.type === HttpEventType.UploadProgress) {
+          cb(Math.round((100 * event.loaded) / event.total));
+      }
+  });
+}
+
+export function toResponseBody<T>() {
+  return pipe(
+      filter((event: HttpEvent<T>) => event.type === HttpEventType.Response),
+      map((res: HttpResponse<T>) => res.body)
+  );
 }

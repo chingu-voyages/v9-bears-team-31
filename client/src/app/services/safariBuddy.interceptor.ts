@@ -16,13 +16,12 @@ export class SafariBuddyInterceptor implements HttpInterceptor {
     // check if the current user is logged in
     const storage = localStorage || sessionStorage;
     const currentUser = JSON.parse(storage.getItem('currentUser'));
-    console.log('current user', currentUser);
     if (currentUser) {
       if (currentUser.success && currentUser.data.token) {
       // clone the incoming request and add JWT token in the cloned request's Authorization Header
       request = request.clone({
           setHeaders: {
-              'x-auth-token': `currentUser.data.token`
+              'x-auth-token': currentUser.data.token
           }
       });
     }

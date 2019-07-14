@@ -7,11 +7,16 @@ import {
 import { MediaMatcher } from '@angular/cdk/layout';
 import { MatSidenav, MatSnackBar } from '@angular/material';
 import { IosInstallComponent } from './ios-install/ios-install.component';
+import { slideInAnimation } from './app.animation';
+import { WebServiceService } from './services';
+import { Observable } from 'rxjs';
+import { NavigationStart, NavigationEnd, NavigationCancel, NavigationError, Router, Event } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  animations: [slideInAnimation]
 })
 export class AppComponent implements OnInit {
   title = 'Safari Buddy';
@@ -28,19 +33,37 @@ export class AppComponent implements OnInit {
     {
       title: 'Register',
       path: '/register'
+    },
+    {
+      title: 'Dashboard',
+      path: '/dashboard'
     }
   ];
 // tslint:disable-next-line: variable-name
+  authenticated = false;
+  isLoggedIn$: Observable<boolean>;
   private _mobileQueryListener: () => void;
   @Output() toggleSideNav = new EventEmitter();
+  loading: boolean;
 
-  constructor( changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private toast: MatSnackBar) {
+
+  constructor(
+    changeDetectorRef: ChangeDetectorRef,
+    media: MediaMatcher,
+    private toast: MatSnackBar,
+    private webService: WebServiceService,
+    private router: Router) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
+    router.events.subscribe((routerEvent: Event) => {
+      this.checkRouterEvent(routerEvent);
+    });
   }
 
   ngOnInit(): void {
+    // Add route
+    this.isLoggedIn$ = this.webService.isLoggedIn;
     // Detects if device is on iOS
     const isIos = () => {
       const userAgent = window.navigator.userAgent.toLowerCase();
@@ -62,6 +85,24 @@ export class AppComponent implements OnInit {
   toggleMobileNav(nav: MatSidenav) {
     if (this.mobileQuery.matches) {
       nav.toggle();
+    }
+  }
+
+  get user() {
+    if (this.webService.isAuthenticated()) {
+      return true;
+    }
+  }
+
+  checkRouterEvent(routerEvent: Event): void {
+    if (routerEvent instanceof NavigationStart) {
+      this.loading = true;
+    }
+
+    if (routerEvent instanceof NavigationEnd ||
+        routerEvent instanceof NavigationCancel ||
+        routerEvent instanceof NavigationError) {
+      this.loading = false;
     }
   }
 }

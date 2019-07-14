@@ -8,6 +8,7 @@ import * as firebase from 'firebase';
 import { environment } from '../../../environments/environment';
 import { WindowService, WebServiceService } from '../../services';
 import { PasswordValidation } from './validatePassword.class';
+import { ToastrService } from 'ngx-toastr';
 
 import * as $ from 'jquery';
 
@@ -51,7 +52,8 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     private service: WebServiceService,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    private toastr: ToastrService
   ) {
     // Defines all the validation messages for the form.
     // These could instead/plus be retrieved fron a file or database.
@@ -97,11 +99,17 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     );
 
     this.windowRef = this.win.windowRef;
-    const new_firebase = firebase.initializeApp(environment.firebase);
+    try {
+      firebase.initializeApp(environment.firebase);
+    } catch (error) {
+    }
+
+    const new_firebase = firebase;
+
+
     this.windowRef.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
       size: 'invisible',
       callback(response: any) {
-        console.log(response);
       }
     });
 
@@ -129,7 +137,6 @@ export class RegisterComponent implements OnInit, AfterViewInit {
 
   sendLoginCode() {
     this.phoneNumber = this.verifyForm.get('phone').value;
-    console.log(this.phoneNumber);
     if (localStorage.getItem(this.phoneNumber)) {
       // already got the verification code once, so show the register form
       this.user = localStorage.getItem(this.phoneNumber);
@@ -141,11 +148,10 @@ export class RegisterComponent implements OnInit, AfterViewInit {
         .auth()
         .signInWithPhoneNumber(this.phoneNumber, appVerifier)
         .then(result => {
-          console.log('result', result);
           this.windowRef.confirmationResult = result;
           this.verificationCode = true;
         })
-        .catch(error => console.log('this errror occurred: ', error));
+        .catch(error => error);
     }
 
     if (this.verificationCode) {
@@ -164,7 +170,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
         const hideDiv = document.getElementById('verify_phone');
         hideDiv.style.display = 'none';
       })
-      .catch((error: any) => console.log('Incorrect code entered?: ', error));
+      .catch((error: any) => error);
   }
 
   userSignUp(): void {
@@ -182,10 +188,13 @@ export class RegisterComponent implements OnInit, AfterViewInit {
           .subscribe((data: any) => {
             if (data.success) {
               this.router.navigate(['/login']);
-            } else if (!data.success) {
+              this.toastr.success(`Registration Successful, please login`, 'Welcome Aboard!!!');
+            } else if (data.error) {
               // TODO
+              this.toastr.error(`Registration failed, please try again`, 'Oh, Sorry!!!');
             } else {
               // TODO
+              this.toastr.error(`Registration failed, please try again`, 'Oh, Sorry!!!');
             }
           });
       }

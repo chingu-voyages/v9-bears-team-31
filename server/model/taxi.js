@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import mongoosastic from 'mongoosastic';
 
 const {
   Schema,
@@ -13,6 +14,7 @@ const taxiSchema = new Schema({
   plateNumber: {
     type: String,
     required: true,
+    es_indexed:true
   },
   model: {
     type: String,

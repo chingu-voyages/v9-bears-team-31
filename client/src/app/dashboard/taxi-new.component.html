@@ -1,0 +1,50 @@
+<span class="fa fa-spinner spinner"
+  *ngIf="loading"></span>
+<h1 mat-dialog-title>Post New Taxi Rating</h1>
+<div class="example-container">
+    <form [formGroup]="formReview">
+      <mat-form-field>
+        <input matInput placeholder="Taxi Plate Number" formControlName="plateNumber">
+        <div class="invalid-feedback" style="display: block">
+          <ng-container *ngIf="hasError('plateNumber', 'required')">This field is required</ng-container>
+        </div>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Taxi Model" formControlName="model">
+        <div class="invalid-feedback" style="display: block">
+          <ng-container *ngIf="hasError('model', 'required')">This field is required</ng-container>
+        </div>
+      </mat-form-field>
+
+        <div class="form-group">
+            <app-file-upload formControlName="taxiImage" name='taxiImage' [progress]="progress"></app-file-upload>
+            <div class="invalid-feedback" style="display: block">
+                <ng-container *ngIf="hasError('taxiImage', 'required')">Only PNG or JPEG 🤡</ng-container>
+            </div>
+        </div>
+
+      <hr>
+      <div>Add Rating</div>
+      <ngb-rating
+                [readonly]="flase" max="5"
+                formControlName="userReview"
+                style=" font-size: 1.5rem; color: #F3A41A;">
+      </ngb-rating>
+      <div class="invalid-feedback" style="display: block">
+        <ng-container *ngIf="hasError('userReview', 'required')">This field is required</ng-container>
+      </div>
+      <mat-form-field>
+        <textarea matInput placeholder="Reason for this Rating" formControlName="comment"></textarea>
+        <div class="invalid-feedback" style="display: block">
+          <ng-container *ngIf="hasError('comment', 'required')">This field is required</ng-container>
+        </div>
+      </mat-form-field>
+      <div class="form-group">
+        <button mat-button  cdkFocusInitial (click)="createNewReview(data)" [mat-dialog-close]="!loading">Add Review</button>
+        <button mat-button  (click)="onNoClick()">Cancel</button>
+      </div>
+    </form>
+</div>
+
+

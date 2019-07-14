@@ -17,7 +17,13 @@ export default {
         .trim()
         .required(),
       userReview: Joi.number()
-        .required()
+        .required(),
+      userComment: Joi.string()
+        .strict()
+        .trim()
+        .min(10)
+        .max(100)
+        .required(),
     });
     return Joi.validate(field, schema);
   }
