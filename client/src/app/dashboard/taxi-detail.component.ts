@@ -12,7 +12,7 @@ import { TaxiReviewModalComponent } from './taxi-review-modal.component';
 })
 export class TaxiDetailComponent implements OnInit {
   pageTitle = 'Taxi Detail';
-  taxi: Taxi;
+  taxi: any;
   errorMessage: string;
 
   currentUser: any;
