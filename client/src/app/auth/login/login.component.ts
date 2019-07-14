@@ -42,12 +42,14 @@ export class LoginComponent implements OnInit {
       )
       .subscribe((credentials: any) => {
         if (credentials.success) {
+          this.loading = false;
           this.toastr.success(`Howdy, ${credentials.data.userData.firstName}`);
           // this.webServivce.notify('info', `Welcome to Safari Buddy ${credentials.data.userData.firstName}`, 'top', 'right');
           this.route.queryParams.subscribe(params => {
             this.router.navigate([params.redirect || '/dashboard'], {replaceUrl: true});
           });
         } else {
+          this.loading = false;
           this.toastr.error('Invalid phone or password');
           // this.webServivce.notify('warning', `Something went wrong`, 'top', 'right');
           this.route.queryParams.subscribe(params => {

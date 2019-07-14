@@ -1,4 +1,6 @@
 <div class="container">
+  <span class="fa fa-spinner spinner"
+    *ngIf="loading"></span>
   <div class="row">
     <div id="verify_phone" class="with-form col-xs-4">
       <form [formGroup]="verifyForm" class="form">

@@ -50,6 +50,8 @@
               <button class="btn btn-fill btn-info btn-wd" type="submit" [disabled]="loginForm.invalid || loading">
                 <i class="fas fa-cog fa-spin" [hidden]="!loading"></i>
                 <span>Login</span>
+                <span class="fa fa-spinner spinner"
+                *ngIf="loading"></span>
               </button>
             </div>
             <a [routerLink]="['/register']" routerLinkActive="router-link-active" class="register-link">New User? Register</a>

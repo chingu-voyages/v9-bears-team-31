@@ -29,7 +29,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
   error: string;
   userJson: any;
   errorMessage: string;
-  isloading = false;
+  loading = false;
 
   type: FormGroup;
   validPasswordRegister = false;
@@ -176,6 +176,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
   userSignUp(): void {
     if (this.userRegistrationForm.valid) {
       if (this.userRegistrationForm.dirty) {
+        this.loading = true;
         const userDetails = this.userRegistrationForm.getRawValue();
         this.userJson = {
           firstName: userDetails.firstName,
@@ -187,6 +188,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
         this.service.register(this.userJson)
           .subscribe((data: any) => {
             if (data.success) {
+              this.loading = false;
               this.router.navigate(['/login']);
               this.toastr.success(`Registration Successful, please login`, 'Welcome Aboard!!!');
             } else if (data.error) {
@@ -194,6 +196,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
               this.toastr.error(`Registration failed, please try again`, 'Oh, Sorry!!!');
             } else {
               // TODO
+              this.loading = false;
               this.toastr.error(`Registration failed, please try again`, 'Oh, Sorry!!!');
             }
           });

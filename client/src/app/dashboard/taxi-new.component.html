@@ -1,7 +1,9 @@
-<span class="fa fa-spinner spinner"
-  *ngIf="loading"></span>
+
 <h1 mat-dialog-title>Post New Taxi Rating</h1>
+
 <div class="example-container">
+    <span class="fa fa-spinner spinner"
+    *ngIf="loading"></span>
     <form [formGroup]="formReview">
       <mat-form-field>
         <input matInput placeholder="Taxi Plate Number" formControlName="plateNumber">
