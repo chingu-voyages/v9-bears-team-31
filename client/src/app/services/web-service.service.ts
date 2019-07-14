@@ -4,6 +4,7 @@ import { tap, catchError, filter, map } from 'rxjs/operators';
 import { Observable, of, throwError, pipe, BehaviorSubject } from 'rxjs';
 import { User, Taxi } from './model';
 import { LoginContext } from './model';
+import { environment } from '../../environments/environment.prod';
 
 declare var $: any;
 
@@ -15,6 +16,7 @@ const credentialsKey = 'currentUser';
 export class WebServiceService {
   admin: boolean;
   client: boolean;
+  url = environment.url;
 
   Role = {
     Admin: this.admin,
@@ -42,7 +44,7 @@ export class WebServiceService {
       password: context.password
     };
 
-    return this.http.post<any>('http://127.0.0.1:3300/api/v1/login', user)
+    return this.http.post<any>(`${this.url}/v1/login`, user)
       .pipe(
         tap((userResponse: any) => {
           this.setCredentials(userResponse, context.remember);
@@ -53,7 +55,7 @@ export class WebServiceService {
 
   // register service
   register(user: any): Observable<any> {
-    return this.http.post<any>('http://127.0.0.1:3300/api/v1/users', user)
+    return this.http.post<any>(`${this.url}/v1/users`, user)
       .pipe(
         tap((userResponse: any) => {
           return of(userResponse);
@@ -73,7 +75,7 @@ export class WebServiceService {
 
   // post review
   rate(userRating: any): Observable<any> {
-    return this.http.post<any>('http://127.0.0.1:3300/api/v1/review', userRating)
+    return this.http.post<any>(`${this.url}/v1/review`, userRating)
       .pipe(
         tap((rating: any) => {
           return of(rating);
@@ -83,7 +85,7 @@ export class WebServiceService {
 
   // post review
   taxi(taxi: any): Observable<any> {
-    return this.http.post<any>('http://127.0.0.1:3300/api/v1/taxis', toFormData(taxi), {
+    return this.http.post<any>(`${this.url}/v1/taxis`, toFormData(taxi), {
       reportProgress: true,
       observe: 'events'
     })
@@ -130,7 +132,7 @@ export class WebServiceService {
 
 
   getTaxiCollection(filter = '' ): Observable<any> {
-    return this.http.get<any>('http://127.0.0.1:3300/api/v1/taxis', {
+    return this.http.get<any>(`${this.url}/v1/taxis`, {
       params: new HttpParams()
         .set('plateNumber', filter)
     })
@@ -145,7 +147,7 @@ export class WebServiceService {
     if (numberPlate === null || numberPlate === undefined) {
       return of(this.initializeTaxi());
     }
-    const url = `http://127.0.0.1:3300/api/v1/taxis/${numberPlate}`;
+    const url = `${this.url}/v1/taxis/${numberPlate}`;
     return this.http.get<Taxi>(url)
       .pipe(
         tap(data => of(data)),

@@ -8,5 +8,6 @@ export const environment = {
     storageBucket: 'suredoctor-c20d0.appspot.com',
     messagingSenderId: '852191743228',
     appId: '1:852191743228:web:298037274ca45d55'
-  }
+  },
+  url: 'https://taxis-rider.herokuapp.com/api'
 };
