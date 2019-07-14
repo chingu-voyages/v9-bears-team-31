@@ -5,9 +5,7 @@ import {
   findAllTaxi,
   upload,
 } from '../controller/taxiController';
-import {
-  multerUploads
-} from '../middleware/multer';
+import { multerUploads } from '../middleware/multer';
 import auth from '../middleware/auth';
 import admin from '../middleware/admin';
 
@@ -15,8 +13,8 @@ const taxiRouter = express.Router();
 
 taxiRouter.route('/taxis')
   .post([auth, multerUploads], createTaxi)
-  .get(auth, findAllTaxi); // auth
-
+  .get(findAllTaxi); // auth
+  
 taxiRouter.route('/taxis/:plateNumber')
   .get(auth, findATaxi);
 

@@ -14,6 +14,10 @@ const reviewSchema = new Schema({
     type: Number,
     required: true,
   },
+  userComment: {
+    type: String,
+    required: true,
+  },
 }, {
   timestamps: true,
 });

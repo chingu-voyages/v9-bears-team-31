@@ -76,13 +76,13 @@ export const findATaxi = async (req, res) => {
     review.map(data => {
       total = total + data.userReview;
     })
-    const average = (total) / (review.length);
+    const average = (total)/(review.length);
+    const averageRounded =  Math.ceil(average*2)/2;
 
-    taxi = await Taxi.findOneAndUpdate({
-      plateNumber
-    }, {
-      averageReview: average
-    });
+    taxi = await Taxi.findOneAndUpdate({plateNumber}, {
+      averageReview: averageRounded
+      }
+    );
 
     await taxi.save();
 

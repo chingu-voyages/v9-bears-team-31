@@ -1,0 +1,90 @@
+* {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+.mat-drawer-content {
+  background: #ffffff !important;
+}
+
+.main-content {
+  display: flex;
+  background: #FFFFFF;
+  overflow-x: hidden;
+  overflow-x: auto;
+}
+
+.taxi-details {
+  flex-basis: 60%;
+  margin: 20px;
+  margin-bottom: 10px;
+}
+
+.taxi-reviews {
+  position:sticky;
+  flex-basis: 40%;
+  overflow-x: hidden;
+  overflow-x: auto;
+}
+
+.taxi-reviews h3 {
+  position:sticky;
+  top: 0;
+  background:#eee;
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 5px;
+  color: #262858;
+  z-index:2;
+  text-align: center;
+}
+
+.reviews .single-review {
+  background: #D8CACA;
+  margin: 2px;
+  padding: 5px;
+}
+
+.right-sidebar-items {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile .mat-card .mat-card-title,  .new-review .mat-card .mat-card-title{
+  text-align: center;
+}
+
+.profile .mat-card .mat-card-content {
+  justify-content: center;
+  margin-left: 100px;
+}
+
+.profile .mat-card .mat-card-actions button {
+  display: flex;
+  justify-content: right;
+  left: 280px;
+}
+.example-card {
+  max-width: 100%;
+}
+
+.mat-card-actions button {
+  padding: 5px;
+}
+
+@media (max-width: 769px) {
+  .main-content {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media(max-width: 480px) {
+  .profile .mat-card .mat-card-actions button {
+    left: 200px;
+  }
+  .profile .mat-card .mat-card-content {
+    margin-left: 70px;
+  }
+}
+

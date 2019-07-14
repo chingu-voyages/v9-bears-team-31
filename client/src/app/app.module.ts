@@ -17,6 +17,15 @@ import { RegisterComponent } from './auth/register/register.component';
 import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { InternationalPhoneNumberModule } from 'ngx-international-phone-number';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { TaxiDetailComponent } from './dashboard/taxi-detail.component';
+import { TaxiReviewModalComponent } from './dashboard/taxi-review-modal.component';
+import { TaxiNewComponent } from './dashboard/taxi-new.component';
+import { FileUploadComponent } from './file-upload/file-upload.component';
+import { ProgressComponent } from './progress/progress.component';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -24,7 +33,13 @@ import { InternationalPhoneNumberModule } from 'ngx-international-phone-number';
     HomeComponent,
     IosInstallComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    DashboardComponent,
+    TaxiDetailComponent,
+    TaxiReviewModalComponent,
+    TaxiNewComponent,
+    FileUploadComponent,
+    ProgressComponent
   ],
   imports: [
     BrowserModule,
@@ -37,13 +52,16 @@ import { InternationalPhoneNumberModule } from 'ngx-international-phone-number';
     HttpClientModule,
     BsDropdownModule.forRoot(),
     NgxIntlTelInputModule,
-    InternationalPhoneNumberModule
+    InternationalPhoneNumberModule,
+    NgbModule,
+    AngularFontAwesomeModule,
+    ToastrModule.forRoot(),
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: SafariBuddyInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
   ],
   bootstrap: [AppComponent],
-  entryComponents: [IosInstallComponent]
+  entryComponents: [IosInstallComponent, TaxiReviewModalComponent, TaxiNewComponent]
 })
 export class AppModule { }

@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import mexp from 'mongoose-elasticsearch-xp';
+import mongoosastic from 'mongoosastic';
 
 const {
   Schema,
@@ -15,6 +16,7 @@ const taxiSchema = new Schema({
     type: String,
     es_indexed: true,
     required: true,
+    es_indexed:true
   },
   model: {
     type: String,
@@ -28,5 +30,7 @@ const taxiSchema = new Schema({
   timestamps: true,
 });
 
-taxiSchema.plugin(mexp);
+taxiSchema.index({
+  "$**": "text"
+});
 export default mongoose.model('Taxi', taxiSchema);
