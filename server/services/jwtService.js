@@ -11,12 +11,11 @@ export const generateToken = async (payload) => {
   }
 };
 
-export const decodeToken = async (token, callback) => {
+export const decodeToken = async (token) => {
   try {
-    return await jwt.verify(token, process.env.JWTSECRET, (err, decoded) => {
-      if (err) return callback(err);
-      return callback(false, decoded);
-    });
+    const data = await jwt.verify(token, process.env.JWTSECRET);
+    if (!data) throw new Error('No data');
+    return data;
   } catch (error) {
     return error;
   }

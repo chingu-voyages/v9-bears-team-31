@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import mexp from 'mongoose-elasticsearch-xp';
 import mongoosastic from 'mongoosastic';
 
 const {
@@ -13,6 +14,7 @@ const taxiSchema = new Schema({
   },
   plateNumber: {
     type: String,
+    es_indexed: true,
     required: true,
     es_indexed:true
   },
