@@ -5,6 +5,8 @@ import { Observable, of, throwError, pipe, BehaviorSubject } from 'rxjs';
 import { User, Taxi } from './model';
 import { LoginContext } from './model';
 
+declare var $: any;
+
 const credentialsKey = 'currentUser';
 
 @Injectable({
@@ -185,6 +187,20 @@ export class WebServiceService {
     }
     console.error(err);
     return throwError(errorMessage);
+  }
+
+  notify(type: string, message: string, from: string, align: string) {
+    $.notify({
+        icon: 'notifications',
+        message
+    }, {
+        type,
+        timer: 3000,
+        placement: {
+            from,
+            align
+        }
+    });
   }
 
 }

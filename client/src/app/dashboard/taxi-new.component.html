@@ -1,3 +1,5 @@
+<span class="fa fa-spinner spinner"
+  *ngIf="loading"></span>
 <h1 mat-dialog-title>Post New Taxi Rating</h1>
 <div class="example-container">
     <form [formGroup]="formReview">
@@ -18,7 +20,7 @@
         <div class="form-group">
             <app-file-upload formControlName="taxiImage" name='taxiImage' [progress]="progress"></app-file-upload>
             <div class="invalid-feedback" style="display: block">
-                <ng-container *ngIf="hasError('taxiImage', 'requiredFileType')">Only PNG or JPEG 🤡</ng-container>
+                <ng-container *ngIf="hasError('taxiImage', 'required')">Only PNG or JPEG 🤡</ng-container>
             </div>
         </div>
 
@@ -39,7 +41,7 @@
         </div>
       </mat-form-field>
       <div class="form-group">
-        <button mat-button  cdkFocusInitial (click)="createNewReview()" mat-dialog-close>Add Review</button>
+        <button mat-button  cdkFocusInitial (click)="createNewReview(data)" [mat-dialog-close]="!loading">Add Review</button>
         <button mat-button  (click)="onNoClick()">Cancel</button>
       </div>
     </form>

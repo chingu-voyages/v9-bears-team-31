@@ -25,6 +25,7 @@ import { TaxiNewComponent } from './dashboard/taxi-new.component';
 import { FileUploadComponent } from './file-upload/file-upload.component';
 import { ProgressComponent } from './progress/progress.component';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
     InternationalPhoneNumberModule,
     NgbModule,
     AngularFontAwesomeModule,
+    ToastrModule.forRoot(),
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: SafariBuddyInterceptor, multi: true},

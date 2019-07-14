@@ -15,6 +15,13 @@ export class TaxiDetailComponent implements OnInit {
   taxi: Taxi;
   errorMessage: string;
 
+  currentUser: any;
+  storage = localStorage || sessionStorage;
+  userName: string;
+  phoneNumber: string;
+  joinedOn: string;
+
+
   constructor(
     private route: ActivatedRoute,
     public dialog: MatDialog,
@@ -26,6 +33,11 @@ export class TaxiDetailComponent implements OnInit {
       this.route.snapshot.data.resolvedData;
     this.errorMessage = resolvedData.error;
     this.onTaxiRetrieved(resolvedData.taxi);
+
+    this.currentUser = JSON.parse(this.storage.getItem('currentUser'));
+    this.userName = `${this.currentUser.data.userData.firstName} ${this.currentUser.data.userData.lastName}`;
+    this.phoneNumber = this.currentUser.data.userData.phoneNumber;
+    this.joinedOn = this.currentUser.data.userData.createdAt;
   }
 
   onTaxiRetrieved(taxi: Taxi): void {

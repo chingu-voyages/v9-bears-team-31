@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { WebServiceService } from '../services';
 import {requiredFileType} from '../shared/file-upload-validators';
 import { uploadProgress,  toResponseBody} from '../services';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-new-taxi',
@@ -17,10 +18,16 @@ export class TaxiNewComponent implements OnInit {
   progress = 0;
   success: boolean;
 
+  loading: boolean;
+
+  currentUser: any;
+  storage = localStorage || sessionStorage;
+
   constructor(private builder: FormBuilder,
               public dialogRef: MatDialogRef<TaxiNewComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,
-              private webService: WebServiceService) {}
+              private webService: WebServiceService,
+              private toastr: ToastrService) {}
 
   onNoClick(): void {
     this.dialogRef.close();
@@ -31,7 +38,7 @@ export class TaxiNewComponent implements OnInit {
     return control.dirty && control.hasError(error);
   }
 
-  createNewReview() {
+  createNewReview(data: string) {
     const formValue = this.formReview.getRawValue();
     let plateNumber = formValue.plateNumber;
     plateNumber = plateNumber.replace(/ +/g, '');
@@ -45,19 +52,15 @@ export class TaxiNewComponent implements OnInit {
       taxiPlateNumber: plateNumber,
       userReview: rating,
       userComment: comment,
-      userPhoneNumber: '+2560784760712'
+      userPhoneNumber: data
     };
-
-    // const newTaxi = {
-    //   taxiImage: image,
-    //   plateNumber,
-    //   model
-    // };
 
     this.webService.rate(toReview)
       .subscribe((rateRes: any) => {
         if (rateRes.success) {
+          this.loading = true;
           this.hasRated = true;
+           this.toastr.success(`Still working . . ., wait for final verdict`);
           console.log('review response', rateRes.data );
           this.webService.taxi(
             {
@@ -73,13 +76,18 @@ export class TaxiNewComponent implements OnInit {
             .subscribe((newTaxis: any) => {
               this.progress = 0;
               this.success = true;
+              this.loading = false;
               if (newTaxis.success) {
+                this.toastr.success(`New Taxi Review Successful`, 'Thank you');
                 console.log('new taxi created and rated', newTaxis.data);
-              } else if (newTaxis.error) {
+              } else {
+                this.toastr.error(`please try again`, 'Not Successful');
                 console.log('failed to create taxi', newTaxis.message);
               }
             });
-        } else if (rateRes.error) {
+        } else {
+          this.loading = false;
+          this.toastr.error(`please try again`, 'Not Successful');
           console.log('failed to post review');
         }
       });
@@ -91,7 +99,7 @@ export class TaxiNewComponent implements OnInit {
       plateNumber: ['', Validators.required],
       model: ['', Validators.required],
       comment: ['', Validators.required],
-      taxiImage: [null, requiredFileType(['png', 'jpg'])]
+      taxiImage: ['', Validators.required]
     });
   }
 

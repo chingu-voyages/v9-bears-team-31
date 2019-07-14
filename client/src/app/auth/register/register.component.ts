@@ -8,6 +8,7 @@ import * as firebase from 'firebase';
 import { environment } from '../../../environments/environment';
 import { WindowService, WebServiceService } from '../../services';
 import { PasswordValidation } from './validatePassword.class';
+import { ToastrService } from 'ngx-toastr';
 
 import * as $ from 'jquery';
 
@@ -51,7 +52,8 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     private service: WebServiceService,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    private toastr: ToastrService
   ) {
     // Defines all the validation messages for the form.
     // These could instead/plus be retrieved fron a file or database.
@@ -190,10 +192,13 @@ export class RegisterComponent implements OnInit, AfterViewInit {
           .subscribe((data: any) => {
             if (data.success) {
               this.router.navigate(['/login']);
-            } else if (!data.success) {
+              this.toastr.success(`Registration Successful, please login`, 'Welcome Aboard!!!');
+            } else if (data.error) {
               // TODO
+              this.toastr.error(`Registration failed, please try again`, 'Oh, Sorry!!!');
             } else {
               // TODO
+              this.toastr.error(`Registration failed, please try again`, 'Oh, Sorry!!!');
             }
           });
       }

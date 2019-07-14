@@ -10,3 +10,17 @@ form {
   display: block;
   overflow-y: auto;
 }
+
+/* Spinner */
+.spinner {
+  font-size:300%;
+  position:absolute;
+  top: 50%;
+  left: 50%;
+  z-index:10
+}
+
+.fa-spinner {
+    -webkit-animation: spin 1000ms infinite linear;
+    animation: spin 1000ms infinite linear;
+}

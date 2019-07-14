@@ -79,7 +79,8 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(TaxiNewComponent, {
-      width: '400px'
+      width: '400px',
+      data: this.phoneNumber
     });
 
     dialogRef.afterClosed().subscribe(result => {
