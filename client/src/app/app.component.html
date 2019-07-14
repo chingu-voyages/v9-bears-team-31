@@ -8,22 +8,11 @@
       mode="over"
       class="sidenav">
       <div class="content">
-        <mat-list *ngIf="!isLoggedIn$ | async">
-          <mat-list-item  >
-            <a mat-button routerLink="/" routerLinkActive="active" routerLinkActiveOptions="{exact: true}" (click)="toggleMobileNav(lnav)">Home</a>
-          </mat-list-item>
-          <mat-list-item >
-            <a mat-button routerLink="/login" routerLinkActive="active" routerLinkActiveOptions="{exact: true}" (click)="toggleMobileNav(lnav)">Login</a>
-          </mat-list-item>
-          <mat-list-item >
-            <a mat-button routerLink="/register" routerLinkActive="active" routerLinkActiveOptions="{exact: true}" (click)="toggleMobileNav(lnav)">Register</a>
-          </mat-list-item>
-        </mat-list>
-        <mat-list *ngIf="isLoggedIn$ | async">
-          <mat-list-item >
-            <a mat-button routerLink="/dashboard" routerLinkActive="active" routerLinkActiveOptions="{exact: true}" (click)="toggleMobileNav(lnav)">DashBoard</a>
-          </mat-list-item>
-        </mat-list>
+          <mat-list>
+            <mat-list-item *ngFor="let route of nav">
+              <a mat-button routerLink="{{route.path}}" routerLinkActive="active" (click)="toggleMobileNav(lnav)">{{route.title}}</a>
+            </mat-list-item>
+          </mat-list>
       </div>
     </mat-sidenav>
     <mat-sidenav-content class="sidenav-content">
