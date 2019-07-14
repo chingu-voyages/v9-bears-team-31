@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "mocha --require @babel/register test/*.spec.js --exit",
-    "start": "npm run clean && babel server --s -d dist && nodemon dist/app.js",
+    "start": "npm run clean && babel server --s -d dist && node dist/app.js",
     "clean": "rm -rf dist",
     "production": "npm run build && node bin/production"
   },
