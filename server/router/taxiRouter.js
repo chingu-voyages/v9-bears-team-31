@@ -13,7 +13,7 @@ const taxiRouter = express.Router();
 
 taxiRouter.route('/taxis')
   .post([auth, multerUploads], createTaxi)
-  .get(findAllTaxi); // auth
+  .get(auth, findAllTaxi); // auth
   
 taxiRouter.route('/taxis/:plateNumber')
   .get(auth, findATaxi);
