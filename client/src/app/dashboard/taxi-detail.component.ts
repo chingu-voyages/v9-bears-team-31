@@ -40,7 +40,7 @@ export class TaxiDetailComponent implements OnInit {
     this.joinedOn = this.currentUser.data.userData.createdAt;
   }
 
-  onTaxiRetrieved(taxi: Taxi): void {
+  onTaxiRetrieved(taxi: any): void {
     this.taxi = taxi;
 
     if (this.taxi) {
