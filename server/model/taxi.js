@@ -28,4 +28,7 @@ const taxiSchema = new Schema({
   timestamps: true,
 });
 
-export default mongoose.model('Taxi', taxiSchema.plugin(mongoosastic));
+taxiSchema.index({
+  "$**": "text"
+});
+export default mongoose.model('Taxi', taxiSchema);
