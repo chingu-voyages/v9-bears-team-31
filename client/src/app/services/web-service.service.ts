@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpEvent, HttpEventType, HttpResponse } from '@angular/common/http';
 import { tap, catchError, filter, map } from 'rxjs/operators';
-import { Observable, of, throwError, pipe } from 'rxjs';
+import { Observable, of, throwError, pipe, BehaviorSubject } from 'rxjs';
 import { User, Taxi } from './model';
 import { LoginContext } from './model';
 
@@ -20,6 +20,11 @@ export class WebServiceService {
   };
 
   private _credentials: User | null;
+  private loggedIn = new BehaviorSubject<boolean>(this.isAuthenticated());
+
+  get isLoggedIn() {
+    return this.loggedIn.asObservable();
+  }
 
   constructor(private http: HttpClient) {
     const savedCredentials = sessionStorage.getItem(credentialsKey) || localStorage.getItem(credentialsKey);
@@ -124,6 +129,7 @@ export class WebServiceService {
       localStorage.removeItem(credentialsKey);
     }
   }
+
 
   getTaxiCollection(filter = '' ): Observable<any> {
     console.log('filter', filter);

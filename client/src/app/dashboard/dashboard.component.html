@@ -1,17 +1,17 @@
 <div class="main row">
   <div class="col-md-8 main-content">
-    <div class="header-dashboard">
-        <mat-form-field>
-          <input matInput placeholder="Search Meteotrite data" #input>
-        </mat-form-field>
-        <div class="create-taxi">
-          <button mat-raised-button color="primary" class="create-taxi-button" (click)="openDialog()">Add New Taxi Review</button>
-        </div>
-    </div>
       <!-- <h1>
           {{ title }}
       </h1> -->
       <div class="mat-elevation-z8">
+          <div class="header-dashboard">
+              <mat-form-field>
+                <input matInput placeholder="Search Meteotrite data" #input>
+              </mat-form-field>
+              <div class="create-taxi">
+                <button mat-raised-button color="primary" class="create-taxi-button" (click)="openDialog()">Add New Taxi Review</button>
+              </div>
+          </div>
           <div class="spinner-container" *ngIf="taxiDataSource.loading | async">
 
               <mat-spinner></mat-spinner>
@@ -50,13 +50,34 @@
       </div>
   </div>
   <div class="col-md-4 right-sidebar">
-    Right Sidebar Items
     <div class="right-sidebar-items">
       <div class="profile">
-        Profile Here
+        <mat-card>
+          <mat-card-title>
+            My Profile
+          </mat-card-title>
+          <hr>
+          <mat-card-content>
+            <div class="username"><strong>User Name: &nbsp; &nbsp; &nbsp; &nbsp;</strong>{{userName}}</div>
+            <div class="contact-number"><strong>Contact: &nbsp; &nbsp; &nbsp; &nbsp;</strong> {{phoneNumber}}</div>
+            <div class="date-joined"><strong>Joined On: &nbsp; &nbsp; &nbsp; &nbsp;</strong>{{joinedOn | date}}</div>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-raised-button color="accent" (click)="logout()">LOG OUT</button>
+          </mat-card-actions>
+        </mat-card>
       </div>
+      <hr>
       <div class="new-review">
-        new review here
+          <mat-card>
+              <mat-card-title>
+               Safari Buddy Statistics
+              </mat-card-title>
+              <hr>
+              <mat-card-content>
+                <p>Coming soon !!!!</p>
+              </mat-card-content>
+            </mat-card>
       </div>
     </div>
   </div>

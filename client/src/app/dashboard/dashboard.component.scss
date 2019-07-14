@@ -4,9 +4,9 @@
   overflow-x: hidden;
   // box-sizing: border-box;
 }
-.mat-drawer-content {
-  background: #ffffff !important;
-}
+// .mat-drawer-content {
+//   background: #ffffff !important;
+// }
 
 .main-content {
   background: #262858;
@@ -23,30 +23,38 @@
   margin-bottom: 10px;
 }
 
-::ng-deep .mat-form-field-placeholder{
+tr .mat-header-row {
+  position: sticky !important;
+}
+
+::ng-deep .main-content .header-dashboard  .mat-form-field-placeholder{
 
   color: #ffffff !important;
 }
 
-::ng-deep .mat-form-field-underline{
-  background-color:#FFFFFF;
+::ng-deep .main-content .header-dashboard  .mat-form-field-underline{
+  background-color:#FFFFFF !important;
 }
 
-.right-sidebar {
-  background: orange;
-}
 
 .right-sidebar-items {
   display: flex;
   flex-direction: column;
 }
 
-.profile {
-  background: blue;
+.profile .mat-card .mat-card-title,  .new-review .mat-card .mat-card-title{
+  text-align: center;
 }
 
-.new-review {
-  background: green;
+.profile .mat-card .mat-card-content {
+  justify-content: center;
+  margin-left: 100px;
+}
+
+.profile .mat-card .mat-card-actions button {
+  display: flex;
+  justify-content: right;
+  left: 280px;
 }
 
 h1 {
@@ -66,34 +74,6 @@ form {
   flex-direction: row;
   justify-content: center;
 }
-
-// .mat-form-field {
-//   text-align: center;
-//   font-size: 14px;
-//   width: 100%;
-// }
-// .mat-header-cell {
-//   background: #f5b563;
-//   font-size: 1rem;
-//   color: #000000;
-// }
-// .mat-table__wrapper .mat-table {
-//     min-width: auto !important;
-//     width: 100% !important;
-// }
-
-// .mat-header-row {
-//     width: 100%;
-// }
-
-// .mat-row {
-//     width: 100%;
-// }
-
-// .mat-column-image {
-//   flex: 0 0 25% !important;
-//   min-width: 104px !important;
-// }
 
 table{
  width: 100%;
@@ -153,5 +133,14 @@ table{
   border:2px solid #7985cb;
   background-color:#7985cb;
   color:#fafafa;
+}
+
+@media(max-width: 480px) {
+  .profile .mat-card .mat-card-actions button {
+    left: 200px;
+  }
+  .profile .mat-card .mat-card-content {
+    margin-left: 70px;
+  }
 }
 

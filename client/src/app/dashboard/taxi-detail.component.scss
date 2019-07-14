@@ -16,6 +16,8 @@
 
 .taxi-details {
   flex-basis: 60%;
+  margin: 20px;
+  margin-bottom: 10px;
 }
 
 .taxi-reviews {
@@ -43,23 +45,25 @@
   padding: 5px;
 }
 
-.right-sidebar {
-  background: orange;
-}
-
 .right-sidebar-items {
   display: flex;
   flex-direction: column;
 }
 
-.profile {
-  background: blue;
+.profile .mat-card .mat-card-title,  .new-review .mat-card .mat-card-title{
+  text-align: center;
 }
 
-.new-review {
-  background: green;
+.profile .mat-card .mat-card-content {
+  justify-content: center;
+  margin-left: 100px;
 }
 
+.profile .mat-card .mat-card-actions button {
+  display: flex;
+  justify-content: right;
+  left: 280px;
+}
 .example-card {
   max-width: 100%;
 }
@@ -72,6 +76,15 @@
   .main-content {
     display: flex;
     flex-direction: column;
+  }
+}
+
+@media(max-width: 480px) {
+  .profile .mat-card .mat-card-actions button {
+    left: 200px;
+  }
+  .profile .mat-card .mat-card-content {
+    margin-left: 70px;
   }
 }
 

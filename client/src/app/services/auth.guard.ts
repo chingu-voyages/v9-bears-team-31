@@ -17,7 +17,7 @@ import { WebServiceService } from './web-service.service';
           // authorized so return true
           return true;
         }
-        this.router.navigate(['/'], { queryParams: { redirect: state.url }, replaceUrl: true });
+        this.router.navigate(['/login'], { queryParams: { redirect: state.url }, replaceUrl: true });
         return false;
      }
 

@@ -1,9 +1,9 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
-import { Taxi, TaxiResolved } from '../services';
+import { Taxi, TaxiResolved, WebServiceService } from '../services';
 import { TaxiReviewModalComponent } from './taxi-review-modal.component';
 
 @Component({
@@ -15,7 +15,11 @@ export class TaxiDetailComponent implements OnInit {
   taxi: Taxi;
   errorMessage: string;
 
-  constructor(private route: ActivatedRoute, public dialog: MatDialog) { }
+  constructor(
+    private route: ActivatedRoute,
+    public dialog: MatDialog,
+    private webService: WebServiceService,
+    private router: Router) { }
 
   ngOnInit(): void {
     const resolvedData: TaxiResolved =
@@ -43,5 +47,9 @@ export class TaxiDetailComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       // this.animal = result;
     });
+  }
+
+  logout() {
+    this.webService.logout().subscribe(() => this.router.navigate(['/login'], { replaceUrl: true }));
   }
 }

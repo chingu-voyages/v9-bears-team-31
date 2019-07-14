@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { finalize } from 'rxjs/operators';
+import { AppComponent } from '../../app.component';
 
 import { environment } from '../../../environments/environment';
 import { WebServiceService } from '../../services';
@@ -41,6 +42,10 @@ export class LoginComponent implements OnInit {
       .subscribe((credentials: any) => {
         if (credentials.success) {
           console.log('login successful');
+          this.route.queryParams.subscribe(params => {
+            this.router.navigate([params.redirect || '/dashboard'], {replaceUrl: true});
+          });
+        } else {
           this.route.queryParams.subscribe(params => {
             this.router.navigate([params.redirect || '/login'], {replaceUrl: true});
           });

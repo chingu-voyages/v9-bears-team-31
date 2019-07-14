@@ -8,6 +8,8 @@ import { MediaMatcher } from '@angular/cdk/layout';
 import { MatSidenav, MatSnackBar } from '@angular/material';
 import { IosInstallComponent } from './ios-install/ios-install.component';
 import { slideInAnimation } from './app.animation';
+import { WebServiceService } from './services';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -37,16 +39,25 @@ export class AppComponent implements OnInit {
     }
   ];
 // tslint:disable-next-line: variable-name
+  authenticated = false;
+  isLoggedIn$: Observable<boolean>;
   private _mobileQueryListener: () => void;
   @Output() toggleSideNav = new EventEmitter();
 
-  constructor( changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private toast: MatSnackBar) {
+
+  constructor(
+    changeDetectorRef: ChangeDetectorRef,
+    media: MediaMatcher,
+    private toast: MatSnackBar,
+    private webService: WebServiceService) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
   }
 
   ngOnInit(): void {
+    // Add route
+    this.isLoggedIn$ = this.webService.isLoggedIn;
     // Detects if device is on iOS
     const isIos = () => {
       const userAgent = window.navigator.userAgent.toLowerCase();
@@ -68,6 +79,12 @@ export class AppComponent implements OnInit {
   toggleMobileNav(nav: MatSidenav) {
     if (this.mobileQuery.matches) {
       nav.toggle();
+    }
+  }
+
+  get user() {
+    if (this.webService.isAuthenticated()) {
+      return true;
     }
   }
 }

@@ -8,6 +8,7 @@ import { TaxiDataSource } from './taxi.datasource';
 
 import { MatDialog } from '@angular/material';
 import { TaxiNewComponent } from './taxi-new.component';
+import { Router } from '@angular/router';
 
 
 
@@ -25,13 +26,19 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
   taxiDataSource: TaxiDataSource;
   searchForm: FormGroup;
+  currentUser: any;
+  storage = localStorage || sessionStorage;
+  userName: string;
+  phoneNumber: string;
+  joinedOn: string;
 
   displayedColumns: string[] = ['image', 'plateNumber', 'review'];
 
   constructor(
     private webService: WebServiceService,
     private builder: FormBuilder,
-    public dialog: MatDialog) { }
+    public dialog: MatDialog,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.taxiDataSource = new TaxiDataSource(this.webService);
@@ -40,6 +47,11 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     this.searchForm = this.builder.group({
       searchInput: ''
     });
+
+    this.currentUser = JSON.parse(this.storage.getItem('currentUser'));
+    this.userName = `${this.currentUser.data.userData.firstName} ${this.currentUser.data.userData.lastName}`;
+    this.phoneNumber = this.currentUser.data.userData.phoneNumber;
+    this.joinedOn = this.currentUser.data.userData.createdAt;
   }
 
   ngAfterViewInit() {
@@ -73,6 +85,10 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     dialogRef.afterClosed().subscribe(result => {
       // TODO
     });
+  }
+
+  logout() {
+    this.webService.logout().subscribe(() => this.router.navigate(['/login'], { replaceUrl: true }));
   }
 
 }
