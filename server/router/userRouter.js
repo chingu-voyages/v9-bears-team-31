@@ -12,7 +12,7 @@ import admin from '../middleware/admin';
 const userRouter = express.Router();
 
 userRouter.route('/users')
-  .get([admin, auth], getUsers) // 
+  .get([auth, admin ], getUsers) // 
   .post(signUp);
 
 userRouter.route('/login')

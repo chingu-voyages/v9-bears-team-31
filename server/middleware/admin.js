@@ -4,7 +4,13 @@ import {
 
 export default async function (req, res, next) {
   try {
-    const userObj = await decodeToken(req.headers['x-auth-token']);
+    const token = req.headers['x-auth-token'];
+    if (!token) {
+      return res.status(403).send({
+        message: 'Access Denied',
+      });
+    }
+    const userObj = await decodeToken(token);
     req.user = userObj;
     if (!req.user.isAdmin) {
       return res.status(403).send({

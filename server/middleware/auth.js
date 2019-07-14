@@ -1,14 +1,15 @@
-const jwt = require('jsonwebtoken');
+import {
+  decodeToken,
+} from '../services/jwtService';
 
-export default function(req, res, next) {
-    const token = req.headers('x-auth-token');
-    if (!token) return res.status(401).send({'message': 'Access Denied: No token provided'});
-
-    try {
-        const decoded  = jwt.verify(token, process.env.JWTSECRET);
-        req.user = decoded;
-        next();
-    } catch (error) {
-        return res.status(401).send({ error });
-    }
+export default async function (req, res, next) {
+  try {
+    const token = req.header('x-auth-token');
+    if (!token) return res.status(401).send({ message: 'Access Denied: No token provided' });
+    const user = await decodeToken(token);
+    req.user = user;
+    next();
+  } catch (error) {
+    return res.status(401).send({ error });
+  }
 }
