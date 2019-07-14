@@ -27,6 +27,11 @@ tr .mat-header-row {
   position: sticky !important;
 }
 
+.mat-row:hover {
+  background-color: rgb(252, 238, 195);
+  cursor: pointer;
+}
+
 ::ng-deep .main-content .header-dashboard  .mat-form-field-placeholder{
 
   color: #ffffff !important;

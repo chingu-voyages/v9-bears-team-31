@@ -24,6 +24,7 @@ import { TaxiReviewModalComponent } from './dashboard/taxi-review-modal.componen
 import { TaxiNewComponent } from './dashboard/taxi-new.component';
 import { FileUploadComponent } from './file-upload/file-upload.component';
 import { ProgressComponent } from './progress/progress.component';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { ProgressComponent } from './progress/progress.component';
     NgxIntlTelInputModule,
     InternationalPhoneNumberModule,
     NgbModule,
+    AngularFontAwesomeModule,
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: SafariBuddyInterceptor, multi: true},

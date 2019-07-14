@@ -10,6 +10,7 @@ import { IosInstallComponent } from './ios-install/ios-install.component';
 import { slideInAnimation } from './app.animation';
 import { WebServiceService } from './services';
 import { Observable } from 'rxjs';
+import { NavigationStart, NavigationEnd, NavigationCancel, NavigationError, Router, Event } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -43,16 +44,21 @@ export class AppComponent implements OnInit {
   isLoggedIn$: Observable<boolean>;
   private _mobileQueryListener: () => void;
   @Output() toggleSideNav = new EventEmitter();
+  loading: boolean;
 
 
   constructor(
     changeDetectorRef: ChangeDetectorRef,
     media: MediaMatcher,
     private toast: MatSnackBar,
-    private webService: WebServiceService) {
+    private webService: WebServiceService,
+    private router: Router) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
+    router.events.subscribe((routerEvent: Event) => {
+      this.checkRouterEvent(routerEvent);
+    });
   }
 
   ngOnInit(): void {
@@ -85,6 +91,18 @@ export class AppComponent implements OnInit {
   get user() {
     if (this.webService.isAuthenticated()) {
       return true;
+    }
+  }
+
+  checkRouterEvent(routerEvent: Event): void {
+    if (routerEvent instanceof NavigationStart) {
+      this.loading = true;
+    }
+
+    if (routerEvent instanceof NavigationEnd ||
+        routerEvent instanceof NavigationCancel ||
+        routerEvent instanceof NavigationError) {
+      this.loading = false;
     }
   }
 }
