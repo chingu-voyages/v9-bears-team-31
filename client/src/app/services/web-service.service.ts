@@ -131,10 +131,12 @@ export class WebServiceService {
   }
 
 
-  getTaxiCollection(filter = '' ): Observable<any> {
+  getTaxiCollection(page = 1, limit = 20, filter = '' ): Observable<any> {
     return this.http.get<any>(`${this.url}/v1/taxis`, {
       params: new HttpParams()
-        .set('plateNumber', filter)
+        .set('page', page.toString())
+        .set('limit', limit.toString())
+        .set('q', filter)
     })
       .pipe(
         tap((data: any) => {
