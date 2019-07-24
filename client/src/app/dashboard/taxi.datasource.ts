@@ -21,9 +21,9 @@ export class TaxiDataSource implements DataSource<any> {
     this.loadingSubject.complete();
   }
 
-  loadTaxiData(filter = '') {
+  loadTaxiData(page = 0, limit = 20, filter = '') {
     this.loadingSubject.next(true);
-    this.webService.getTaxiCollection(filter)
+    this.webService.getTaxiCollection(page, limit, filter)
       .pipe(
         catchError(() => of([])),
         finalize(() => this.loadingSubject.next(false))

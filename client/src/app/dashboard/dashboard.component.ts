@@ -43,6 +43,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.taxiDataSource = new TaxiDataSource(this.webService);
     this.taxiDataSource.loadTaxiData();
+    console.log('data', this.taxiDataSource.loadTaxiData());
 
     this.searchForm = this.builder.group({
       searchInput: ''
@@ -55,11 +56,13 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
+    this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
     fromEvent(this.input.nativeElement, 'keyup')
       .pipe(
         debounceTime(150),
         distinctUntilChanged(),
         tap(() => {
+          this.paginator.pageIndex = 0;
           this.loadTaxiDataPage();
         })
       )
@@ -73,8 +76,12 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   }
 
   loadTaxiDataPage() {
-    const searchValue = this.searchForm.getRawValue();
-    this.taxiDataSource.loadTaxiData(this.input.nativeElement.value);
+    // const searchValue = this.searchForm.getRawValue();
+    this.taxiDataSource.loadTaxiData(
+      this.paginator.pageIndex,
+      this.paginator.pageSize,
+      this.input.nativeElement.value
+      );
   }
 
   openDialog(): void {

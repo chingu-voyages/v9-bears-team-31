@@ -131,7 +131,7 @@ export class WebServiceService {
   }
 
 
-  getTaxiCollection(page = 1, limit = 20, filter = '' ): Observable<any> {
+  getTaxiCollection(page = 0, limit = 20, filter = '' ): Observable<any> {
     return this.http.get<any>(`${this.url}/v1/taxis`, {
       params: new HttpParams()
         .set('page', page.toString())
