@@ -76,13 +76,14 @@ export const findATaxi = async (req, res) => {
     review.map(data => {
       total = total + data.userReview;
     })
-    const average = (total)/(review.length);
-    const averageRounded =  Math.ceil(average*2)/2;
+    const average = (total) / (review.length);
+    const averageRounded = Math.ceil(average * 2) / 2;
 
-    taxi = await Taxi.findOneAndUpdate({plateNumber}, {
+    taxi = await Taxi.findOneAndUpdate({
+      plateNumber
+    }, {
       averageReview: averageRounded
-      }
-    );
+    });
 
     await taxi.save();
 
@@ -105,12 +106,12 @@ export const findAllTaxi = async (req, res) => {
     const {
       q,
     } = req.query;
-    const search = q === undefined ? {} : {
+    const search = ((q === '' || q === undefined) ? {} : {
       $text: {
         $search: `\"${q}\"`
       },
-    };
-    const criteria = Object.assign({}, {}, search);
+    });
+    const criteria = Object.assign({}, search);
     return PaginationService.paginate(
       Taxi,
       res,
